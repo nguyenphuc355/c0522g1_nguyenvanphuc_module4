@@ -16,10 +16,10 @@
 <form action="save" method="get">
     <table>
         <tr>
-            <td><input type="checkbox" name="condiments" value="Lettuce">Lettuce</td>
-            <td><input type="checkbox" name="condiments" value="Tomato">Tomato</td>
-            <td><input type="checkbox" name="condiments" value="Mustard">Mustard</td>
-            <td><input type="checkbox" name="condiments" value="Sprouts">Sprouts</td>
+            <td><input type="checkbox" name="condiment" value="Lettuce">Lettuce</td>
+            <td><input type="checkbox" name="condiment" value="Tomato">Tomato</td>
+            <td><input type="checkbox" name="condiment" value="Mustard">Mustard</td>
+            <td><input type="checkbox" name="condiment" value="Sprouts">Sprouts</td>
         </tr>
         <tr>
             <td><input type="submit" value="save"></td>
@@ -27,7 +27,7 @@
     </table>
 </form>
 <h1>------spice list-------</h1>
-<c:forEach items="${condiments}" var="spice">
+<c:forEach items="${condiment}" var="spice">
     <h3>${spice}</h3>
 </c:forEach>
 </body>
