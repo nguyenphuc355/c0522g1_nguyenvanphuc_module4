@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td>USD:</td>
-            <td><input type="number" name="usd" placeholder="0"></td>
+            <td><input type="number" name="money" placeholder="0"></td>
         </tr>
         <tr>
             <td></td>
@@ -27,7 +27,7 @@
         </tr>
         <tr>
             <td>Result:</td>
-            <td><input placeholder="VND" value="${reusults}"></td>
+            <td><input placeholder="VND" value="${result}"></td>
         </tr>
     </table>
 </form>

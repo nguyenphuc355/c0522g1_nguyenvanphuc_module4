@@ -19,21 +19,21 @@ public class DictionaryController {
 
     @GetMapping("/")
     public String search() {
-        return "/mean";
+        return "mean";
     }
 
-    @PostMapping("/result")
+    @PostMapping("result")
     public String mean(@RequestParam String keyword, Model model) {
         List<Dictionary> dictionaries = dictionaryService.findAll();
-        for (int i = 0; i < dictionaries.size(); i++) {
-            if (keyword.equalsIgnoreCase(dictionaries.get(i).getEnglish())) {
-                model.addAttribute("word", dictionaries.get(i).getVietNamEse());
+        for (Dictionary dictionary : dictionaries) {
+            if (keyword.equalsIgnoreCase(dictionary.getEnglish())) {
+                model.addAttribute("word", dictionary.getVietNamEse());
                 model.addAttribute("key", keyword);
                 break;
-            }else{
+            } else {
                 model.addAttribute("word", "word not found!!");
             }
         }
-        return "/mean";
+        return "mean";
     }
 }
