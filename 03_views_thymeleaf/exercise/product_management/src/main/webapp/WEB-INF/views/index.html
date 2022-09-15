@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<footer th:replace="/layout :: head"></footer>
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,14 +9,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 </head>
 <body>
+
 <div class="text-center"><h1>PRODUCT LIST</h1></div>
+<footer th:replace="/layout :: head"></footer>
 <div class="row">
-    <div class="col-lg-6"><a th:href="@{/create}">Add new product</a></div>
+    <div class="col-lg-6"></div>
     <div class="col-lg-3"></div>
     <div class="col-lg-3">
-        <form class="d-flex" role="search" action="/nameSearch" method="get" >
+        <form class="d-flex" role="search" action="/nameSearch" method="get">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-outline-success" type="submit" style="background: chartreuse">Search</button>
         </form>
     </div>
 </div>
@@ -25,7 +27,7 @@
         <b th:text="${success}"></b>
     </div>
 </div>
-<table class="table table-striped table-bordered text-center" id="productList">
+<table class="table table-striped  table-bordered text-center" id="productList">
     <thead>
     <tr class="bg-primary">
         <th>Name</th>
@@ -41,9 +43,9 @@
         <td th:text="${product.name}"></td>
         <td th:text="${product.price}"></td>
         <td th:text="${product.status}"></td>
-        <td><a th:href="@{/edit/{id}(id=${product.id})}">edit</a></td>
-        <td><a th:href="@{/delete/{id}(id=${product.id})}">delete</i></a></td>
-        <td><a th:href="@{/view/{id}(id=${product.id})}">view</a></td>
+        <td><a th:href="@{/edit/{id}(id=${product.id})}"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
+        <td><a th:href="@{/delete/{id}(id=${product.id})}"><i class="fa-solid fa-user-minus"></i></a></td>
+        <td><a th:href="@{/view/{id}(id=${product.id})}"><i class="fa-sharp fa-solid fa-eye"></i></a></td>
     </tr>
     </tbody>
 </table>

@@ -41,6 +41,12 @@ public class ProductController {
         productService.save(product);
         return "redirect:/";
     }
+//    @PostMapping("/save")
+//    public String save(Product product, RedirectAttributes redirectAttributes) {
+//        productManagementService.save(product);
+//        redirectAttributes.addFlashAttribute("mess", "Add new product successful!");
+//        return "redirect:/";
+//    }
 
     @GetMapping("delete/{id}")
     public String showDelete(@PathVariable int id, Model model) {
@@ -69,7 +75,7 @@ public class ProductController {
 
     @PostMapping("/update")
     public String update(Product product) {
-        productService.update(product.getId(), product);
+        productService.update(product);
         return "redirect:/";
     }
 
