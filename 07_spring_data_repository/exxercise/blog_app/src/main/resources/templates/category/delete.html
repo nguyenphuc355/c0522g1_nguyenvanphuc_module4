@@ -8,7 +8,7 @@
 <div class="abc text-center"><h3>Remove Category</h3></div>
 <footer th:replace="blog/layout :: head"></footer>
 <div id="form" class="text-center">
-    <form  th:action="@{/blog/delete}" th:object="${category}"
+    <form  th:action="@{/category/delete}" th:object="${category}"
            method="post" novalidate="novalidate">
         <input type="hidden" th:field="*{id}"/>
         <div>
