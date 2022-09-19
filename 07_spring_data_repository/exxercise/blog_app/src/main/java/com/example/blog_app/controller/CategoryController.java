@@ -2,6 +2,7 @@ package com.example.blog_app.controller;
 
 import com.example.blog_app.model.BlogApp;
 import com.example.blog_app.model.Category;
+import com.example.blog_app.service.IBlogService;
 import com.example.blog_app.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +20,15 @@ public class CategoryController {
     @Autowired
     private ICategoryService categoryService;
 
+    @Autowired
+    private IBlogService blogService;
+
     @GetMapping("")
     public String viewCategory(Model model) {
         model.addAttribute("cateGoryList", categoryService.findAll());
         return "category/category";
     }
+
     @GetMapping("/create")
     public String showCreate(Model model) {
         model.addAttribute("cateGoryList", categoryService.findAll());
@@ -31,6 +36,7 @@ public class CategoryController {
         return "category/create";
 
     }
+
     @PostMapping("/save")
     public String saveProduct(Category category, RedirectAttributes redirectAttributes) {
         categoryService.save(category);
@@ -45,7 +51,7 @@ public class CategoryController {
     }
 
     @PostMapping("/update")
-    public String update(Category category){
+    public String update(Category category) {
         categoryService.update(category);
         return "redirect:/category";
     }
@@ -62,6 +68,7 @@ public class CategoryController {
         redirect.addFlashAttribute("success", "Removed product successfully!");
         return "redirect:/category";
     }
+
 
 
 }

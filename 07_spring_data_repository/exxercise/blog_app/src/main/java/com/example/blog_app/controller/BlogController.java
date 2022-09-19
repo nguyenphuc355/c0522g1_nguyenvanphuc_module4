@@ -81,5 +81,4 @@ public class BlogController {
         return "blog/index";
     }
 
-
 }
