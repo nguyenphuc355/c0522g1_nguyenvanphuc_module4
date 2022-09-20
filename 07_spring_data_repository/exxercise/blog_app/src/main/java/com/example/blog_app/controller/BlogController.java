@@ -65,6 +65,7 @@ public class BlogController {
     @GetMapping("edit/{id}")
     public String edit(@PathVariable int id, Model model) {
         model.addAttribute("blogApp", blogService.findById(id));
+        model.addAttribute("categoryList",categoryService.findAll());
         return "blog/edit";
     }
 
@@ -78,6 +79,7 @@ public class BlogController {
     public String search(@RequestParam(value = "name", defaultValue = "") String name, @PageableDefault(value = 3) Pageable pageable, Model model) {
         model.addAttribute("categoryList", categoryService.findAll());
         model.addAttribute("blogList", blogService.findByName(pageable, name));
+        model.addAttribute("name",name);
         return "blog/index";
     }
 

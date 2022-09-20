@@ -1,5 +1,7 @@
 package com.example.blog_app.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.Set;
 

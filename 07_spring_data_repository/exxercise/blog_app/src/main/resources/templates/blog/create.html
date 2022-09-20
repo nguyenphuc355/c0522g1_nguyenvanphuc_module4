@@ -7,7 +7,8 @@
 </head>
 <body>
 <div class="text-center abc"><h3>Add Product</h3></div>
-<head th:replace="blog/layout :: head"></head>z
+<head th:replace="blog/layout :: head"></head>
+z
 <div id="form" style="text-align: center">
     <form th:action="@{/blog/save}" th:object="${blogApp}"
           method="post" novalidate="novalidate">
@@ -29,10 +30,11 @@
             <textarea th:field="*{content}"></textarea>
         </div>
         <div>
-            <label><b>Category: </b></label>
-            <input type="radio" th:field="*{category}"
-            th:each="item : ${cateGoryList}"
-            th:text="${item.name}" th:value="${item.id}"/>
+            <label><b> Category:</b></label>
+            <select th:field="*{category}">
+                <option th:each="category : ${cateGoryList}" th:value="${category.id}"
+                        th:text="${category.name}"></option>
+            </select>
         </div>
         <input type="submit" value="Save"/>
     </form>

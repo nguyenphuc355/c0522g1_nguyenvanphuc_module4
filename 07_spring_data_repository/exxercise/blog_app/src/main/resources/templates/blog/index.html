@@ -85,9 +85,9 @@
     </tbody>
 </table>
 <div>
-    <a th:href="@{'/blog'(page=${blogList.number - 1})}" th:if="${blogList.hasPrevious()}"><i class="fa-solid fa-backward"></i></a>
+    <a th:href="@{'/blog'(page=${blogList.number - 1},name=${name})}" th:if="${blogList.hasPrevious()}"><i class="fa-solid fa-backward"></i></a>
     <span th:text="${blogList.number + 1}"></span>/<span th:text="${blogList.totalPages}"></span>
-    <a th:href="@{'/blog'(page=${blogList.number + 1})}" th:if="${blogList.hasNext()}"><i class="fa-solid fa-forward"></i></a>
+    <a th:href="@{'/blog'(page=${blogList.number + 1},name=${name})}" th:if="${blogList.hasNext()}"><i class="fa-solid fa-forward"></i></a>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
