@@ -57,10 +57,14 @@
             Thông tin đi lại
         </div>
         <div class="row ">
-            <div class="col-3" style="text-align: center"><form:radiobutton path="travel" value="máy bay" label="Máy bay"/></div>
-            <div class="col-3" style="text-align: center"><form:radiobutton path="travel" value="Tàu Thuyền" label="Tàu thuyền"/></div>
-            <div class="col-3" style="text-align: center"><form:radiobutton path="travel" value="Ô tô" label="Ô tô"/></div>
-            <div class="col-3" style="text-align: center"><form:radiobutton path="travel" value="khác" label="Khác"/></div>
+            <div class="col-3" style="text-align: center"><form:radiobutton path="travel" value="máy bay"
+                                                                            label="Máy bay"/></div>
+            <div class="col-3" style="text-align: center"><form:radiobutton path="travel" value="Tàu Thuyền"
+                                                                            label="Tàu thuyền"/></div>
+            <div class="col-3" style="text-align: center"><form:radiobutton path="travel" value="Ô tô"
+                                                                            label="Ô tô"/></div>
+            <div class="col-3" style="text-align: center"><form:radiobutton path="travel" value="khác"
+                                                                            label="Khác"/></div>
         </div>
         <div class="row">
             <div class=" col-6">

@@ -10,9 +10,9 @@
 <head th:replace="/layout :: head"></head>
 <div id="form">
     <form action="/save" th:object="${music}"
-          method="post" novalidate="novalidate">
+          method="post" novalidate="novalidate" >
         <label><b>Id</b></label>
-        <input type="number" th:field="*{id}"/>
+        <input type="number" th:field="*{id}" />
         <div>
             <label><b>Name</b></label>
             <input type="text" th:field="*{name}"/>
