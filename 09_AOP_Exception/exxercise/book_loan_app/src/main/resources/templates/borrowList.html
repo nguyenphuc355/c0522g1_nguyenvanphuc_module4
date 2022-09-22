@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        input[type=text], input[type=email], input[type=number], input[type= date], textarea {
+            width: 100%;
+            padding: 12px 0px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+
+        input[type=submit] {
+            width: 300px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        form{
+            width: 500px;
+        }
+    </style>
+
+</head>
+<body>
+<form th:action="@{/borrowBook}"  th:object="${bookList}"
+      method="post" novalidate="novalidate">
+    <input type="hidden" th:field="*{id}"/>
+    <div>
+        <label><b> Name book</b></label>
+        <input type="text" th:field="*{name}"/>
+    </div>
+    <div>
+        <label><b>Category</b></label>
+        <input type="text" th:field="*{category}"/>
+    </div>
+    <div>
+        <label><b>Total</b></label>
+        <input type="text" th:field="*{count}"/>
+    </div>
+    <input type="submit" value="borrow"/>
+</form>
+</body>
+</html>
