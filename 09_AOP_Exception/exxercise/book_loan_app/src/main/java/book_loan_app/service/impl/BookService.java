@@ -14,7 +14,6 @@ public class BookService implements IBookService {
     @Autowired
     private IBookRepository bookRepository;
 
-
     @Override
     public List<Book> findAll() {
         return bookRepository.findAll();
@@ -25,13 +24,17 @@ public class BookService implements IBookService {
         return bookRepository.findById(id);
     }
 
+
+
     @Override
-    public Book borrowBook(Book book) {
-        return bookRepository.save(book);
+    public Book bookBorrow(Book bookManager) throws Exception {
+        bookManager.setCount(bookManager.getCount()-1);
+        return bookRepository.save(bookManager);
     }
 
     @Override
-    public Book payBook(Book book) {
-        return bookRepository.save(book);
+    public Book bookPay(Book bookManager) {
+        bookManager.setCount(bookManager.getCount()+1);
+        return bookRepository.save(bookManager);
     }
 }

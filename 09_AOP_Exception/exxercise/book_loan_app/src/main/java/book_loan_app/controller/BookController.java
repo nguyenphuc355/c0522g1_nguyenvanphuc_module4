@@ -24,32 +24,31 @@ public class BookController {
         return "bookList";
     }
 
-    @GetMapping("borrow/{id}")
-    public String showBookBorrow(@PathVariable int id, Model model) {
-        model.addAttribute("bookList", bookService.findById(id));
-        return "borrowList";
+    @GetMapping("/borrow/{id}")
+    public String showBorrow(@PathVariable int id, Model model) {
+        model.addAttribute("book", bookService.findById(id));
+
+        return "/borrowList";
     }
 
-    @PostMapping("/borrowBook")
-    public String borrowBook(@ModelAttribute Book book, RedirectAttributes redirectAttributes) throws Exception {
-        book.setCount(book.getCount() - 1);
-        if (book.getCount() < 0) {
+    @PostMapping("/saveBorrow")
+    public String saveBorrowBook(Book book, RedirectAttributes redirectAttributes) throws Exception {
+        bookService.bookBorrow(book);
+        if (book.getCount()<0){
             throw new Exception();
         }
-        bookService.borrowBook(book);
-        redirectAttributes.addFlashAttribute("mess", "mượn sách thành công");
+        redirectAttributes.addFlashAttribute("mess", "Borrowing books successfully !!!");
         return "redirect:/";
     }
 
-    @GetMapping("/payBook/{id}")
-    public String payBook(@PathVariable int id, RedirectAttributes redirectAttributes) throws Exception {
-        Book book = bookService.findById(id);
-        book.setCount(book.getCount() + 1);
+
+    @GetMapping("/savePay")
+    public String savePayBook(Book book, RedirectAttributes redirectAttributes) throws Exception {
+        bookService.bookPay(book);
         if (book.getCount()>book.getTotal()){
             throw new Exception();
         }
-        bookService.payBook(book);
-        redirectAttributes.addFlashAttribute("message", "trả sách thành công");
+        redirectAttributes.addFlashAttribute("message", "Returned the book !!!");
         return "redirect:/";
     }
 }

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Component
 @Aspect
 public class LogAspect {
-    int count = 0;
+    int counts = 0;
 
     @Pointcut("within(book_loan_app.controller.BookController*) ")
     public void allMethodPointCut() {
@@ -33,8 +33,8 @@ public class LogAspect {
 
     @AfterReturning("callShowMethod()")
     public void afterCallShowMethod(JoinPoint joinPoint){
-        count++;
-        System.err.println("số lần ghé thăm thư viện: "+count);
+        counts++;
+        System.err.println("số lần ghé thăm thư viện: "+counts);
     }
 
 }

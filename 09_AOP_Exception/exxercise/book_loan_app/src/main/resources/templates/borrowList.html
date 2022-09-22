@@ -34,7 +34,7 @@
 
 </head>
 <body>
-<form th:action="@{/borrowBook}"  th:object="${bookList}"
+<form th:action="@{/saveBorrow}"  th:object="${book}"
       method="post" novalidate="novalidate">
     <input type="hidden" th:field="*{id}"/>
     <div>

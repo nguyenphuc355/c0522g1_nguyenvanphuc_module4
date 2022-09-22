@@ -29,7 +29,7 @@
         <td th:text="${book.count}"></td>
         <td th:text="${book.total}"></td>
         <td><a th:href="@{/borrow/{id}(id=${book.id})}">borrow</a></td>
-        <td><a th:href="@{/payBook/{id}(id=${book.id})}">PayBook</a></td>
+        <td><a th:href="@{/savePay/{id}(id=${book.id})}">PayBook</a></td>
     </tr>
 </table>
 

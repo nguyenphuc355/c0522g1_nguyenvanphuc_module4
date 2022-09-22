@@ -10,7 +10,8 @@ public interface IBookService {
 
     Book findById(int id);
 
-    Book borrowBook(Book book);
 
-    Book payBook(Book book);
+    Book bookBorrow(Book bookManager) throws Exception;
+
+    Book bookPay(Book bookManager);
 }
