@@ -12,31 +12,30 @@ import java.time.LocalDateTime;
 @Component
 @Aspect
 public class LogAspect {
-    int counts = 0;
+    private int counts = 0;
 
     @Pointcut("within(book_loan_app.controller.BookController*) ")
     public void allMethodPointCut() {
     }
 
-    @Pointcut("execution(* book_loan_app.controller.BookController.*(..))")
-    public void callShowMethod() {
-
-    }
-
-    @Before("allMethodPointCut()")
-    public void beforeCallMethod(JoinPoint joinPoint) {
-        System.err.println("Start method name: " + joinPoint.getSignature().getName() + "Time:" + LocalDateTime.now());
-    }
-
     @AfterReturning("allMethodPointCut()")
     public void afterCallMethod(JoinPoint joinPoint) {
+        counts++;
+        System.err.println("số lần ghé thăm thư viện: " + counts);
         System.err.println("End method name: " + joinPoint.getSignature().getName() + "Time: " + LocalDateTime.now());
     }
 
-    @AfterReturning("callShowMethod()")
-    public void afterCallShowMethod(JoinPoint joinPoint) {
-        counts++;
-        System.err.println("số lần ghé thăm thư viện: " + counts);
+    @Pointcut("execution(* book_loan_app.controller.BookController.save*(..))")
+    public void borrowAndPayMethod(){}
+    
+
+    @AfterReturning("borrowAndPayMethod()")
+    public void borrowAndPayMethod(JoinPoint joinPoint) {
+        System.err.println("End method name: " + joinPoint.getSignature().getName() + "Time:" + LocalDateTime.now());
     }
+
+
+
+
 
 }
