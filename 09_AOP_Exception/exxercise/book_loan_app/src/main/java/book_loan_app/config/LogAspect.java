@@ -17,10 +17,12 @@ public class LogAspect {
     @Pointcut("within(book_loan_app.controller.BookController*) ")
     public void allMethodPointCut() {
     }
-    @Pointcut("execution(* book_loan_app.controller.BookController.showList(..))")
-    public void callShowMethod(){
+
+    @Pointcut("execution(* book_loan_app.controller.BookController.*(..))")
+    public void callShowMethod() {
 
     }
+
     @Before("allMethodPointCut()")
     public void beforeCallMethod(JoinPoint joinPoint) {
         System.err.println("Start method name: " + joinPoint.getSignature().getName() + "Time:" + LocalDateTime.now());
@@ -32,9 +34,9 @@ public class LogAspect {
     }
 
     @AfterReturning("callShowMethod()")
-    public void afterCallShowMethod(JoinPoint joinPoint){
+    public void afterCallShowMethod(JoinPoint joinPoint) {
         counts++;
-        System.err.println("số lần ghé thăm thư viện: "+counts);
+        System.err.println("số lần ghé thăm thư viện: " + counts);
     }
 
 }

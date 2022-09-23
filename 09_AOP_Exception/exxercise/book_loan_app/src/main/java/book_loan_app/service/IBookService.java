@@ -11,7 +11,7 @@ public interface IBookService {
     Book findById(int id);
 
 
-    Book bookBorrow(Book bookManager) throws Exception;
+    Book borrowBook(Book bookManager) throws Exception;
 
-    Book bookPay(Book bookManager);
+    Book payBook(Book bookManager);
 }

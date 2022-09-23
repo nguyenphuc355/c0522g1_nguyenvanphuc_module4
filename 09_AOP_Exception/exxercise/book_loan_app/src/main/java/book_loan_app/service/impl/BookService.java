@@ -27,13 +27,13 @@ public class BookService implements IBookService {
 
 
     @Override
-    public Book bookBorrow(Book bookManager) throws Exception {
+    public Book borrowBook(Book bookManager) throws Exception {
         bookManager.setCount(bookManager.getCount()-1);
         return bookRepository.save(bookManager);
     }
 
     @Override
-    public Book bookPay(Book bookManager) {
+    public Book payBook(Book bookManager) {
         bookManager.setCount(bookManager.getCount()+1);
         return bookRepository.save(bookManager);
     }
