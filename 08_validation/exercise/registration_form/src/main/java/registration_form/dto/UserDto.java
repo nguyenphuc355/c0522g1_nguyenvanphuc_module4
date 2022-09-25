@@ -23,7 +23,7 @@ public class UserDto implements Validator {
 
     @NotBlank(message = "Không được để trống")
     @Min(value = 18,message = "tuổi phải lớn hơn hoặc bằng 18 tuổi")
-    @Max(value = 80,message = "tuổi bé hơn hoặc bằng 80 tuổi")
+//    @Max(value = 80,message = "tuổi bé hơn hoặc bằng 80 tuổi")
     private String age;
 
 
