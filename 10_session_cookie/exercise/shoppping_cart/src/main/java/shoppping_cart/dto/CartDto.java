@@ -43,6 +43,6 @@ public class CartDto {
     }
 
     public void deleteAllProduct(ProductDto productDto) {
-            productDtoMap.remove(productDto);
+        productDtoMap.remove(productDto);
     }
 }

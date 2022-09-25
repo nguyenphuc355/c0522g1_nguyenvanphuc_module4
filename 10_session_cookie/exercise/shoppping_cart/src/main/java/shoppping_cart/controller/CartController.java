@@ -11,7 +11,7 @@ import shoppping_cart.dto.CartDto;
 @RequestMapping("/cart")
 public class CartController {
     @GetMapping
-    public ModelAndView showCart(@SessionAttribute(name = "cart",required = false) CartDto cart){
-return new ModelAndView("cart/listCart","cart",cart);
+    public ModelAndView showCart(@SessionAttribute(name = "cart", required = false) CartDto cart) {
+        return new ModelAndView("cart/listCart", "cart", cart);
     }
 }
