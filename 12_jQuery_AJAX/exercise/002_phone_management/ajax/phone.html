@@ -20,7 +20,6 @@
         <th>Producer</th>
         <th>Model</th>
         <th>Price</th>
-        <!--        <th>Delete</th>-->
     </tr>
     </thead>
     <tbody>
@@ -32,14 +31,6 @@
     </tbody>
 </table>
 
-<!--<div>-->
-<!--    <input type="hidden" id="id" value="">-->
-<!--    <pre>Producer: <input type="text" id="producerEdit" placeholder="producer" value=""></pre>-->
-<!--    <pre>Model:    <input type="text" id="modelEdit" placeholder="model" value=""> </pre>-->
-<!--    <pre>Price:    <input type="text" id="priceEdit" placeholder="price" value=""></pre>-->
-<!--    <pre> <button onclick="editSmartPhone()">Edit</button></pre>-->
-<!--</div>-->
-<!-- Modal -->
 <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -70,6 +61,7 @@
 </body>
 <script>
     $(document).ready(function () {
+        $("#divEdit").hide();
         $("tbody").empty();
         $.ajax({
             url: "http://localhost:8080/smartPhone",
