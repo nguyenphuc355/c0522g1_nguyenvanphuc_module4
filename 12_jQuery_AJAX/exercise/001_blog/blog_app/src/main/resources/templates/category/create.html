@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div class="text-center abc"><h3>Add Category</h3></div>
+<head th:replace="blog/layout :: head"></head>
+<div id="form" style="text-align: center">
+    <form th:action="@{/category/save}" th:object="${category}"
+          method="post" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label><b>Category Name</b></label>
+            <input type="text" th:field="*{name}"/>
+        </div>
+        <input type="submit" value="Save"/>
+    </form>
+</div>
+<footer th:replace="blog/layout :: footer"></footer>
+</body>
+</html>
