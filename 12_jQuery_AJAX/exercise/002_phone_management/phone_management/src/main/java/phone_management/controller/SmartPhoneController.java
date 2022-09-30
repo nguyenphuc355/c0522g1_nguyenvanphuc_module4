@@ -35,15 +35,34 @@ public class SmartPhoneController {
     public ResponseEntity<SmartPhone> findBlogAppById(@PathVariable int id) {
         SmartPhone smartPhone = smartPhoneService.findById(id);
         if (smartPhone == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(smartPhone, HttpStatus.OK);
     }
 
 
-    @PatchMapping("/update")
-    public ResponseEntity<SmartPhone> updateSmartPhone(@RequestBody SmartPhone smartPhone) {
-        return new ResponseEntity<>(smartPhoneService.save(smartPhone), HttpStatus.OK);
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<SmartPhone> updatePhone(@PathVariable int id,
+                                             @RequestBody SmartPhone phone) {
+        SmartPhone newPhone = smartPhoneService.findById(id);
+        if (newPhone == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        newPhone.setModel(phone.getModel());
+        newPhone.setPrice(phone.getPrice());
+        newPhone.setProducer(phone.getProducer());
+        smartPhoneService.save(newPhone);
+        return new ResponseEntity<>(newPhone, HttpStatus.OK);
+    }
 
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<SmartPhone> deleteSmartphone(@PathVariable int id) {
+        SmartPhone smartphoneOptional = smartPhoneService.findById(id);
+        if (smartphoneOptional == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        smartPhoneService.remove(id);
+        return new ResponseEntity<>(smartphoneOptional, HttpStatus.OK);
     }
 }

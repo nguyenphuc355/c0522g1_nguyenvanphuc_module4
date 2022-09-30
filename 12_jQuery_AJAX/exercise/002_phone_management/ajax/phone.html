@@ -20,6 +20,8 @@
         <th>Producer</th>
         <th>Model</th>
         <th>Price</th>
+        <th>Update</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -58,10 +60,85 @@
         </div>
     </div>
 </div>
+<!-- Button trigger modal -->
+<button hidden type="button" id="showUpdate" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#updateId">
+    Update
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="updateId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Phone</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="margin: 10px">
+                    <input hidden type="text" placeholder="input producer" id="idUpdate">
+                </div>
+                <div style="margin: 10px">
+                    <input type="text" placeholder="input producer" id="producerUpdate">
+                </div>
+                <div style="margin: 10px">
+                    <input type="text" placeholder="input model" id="modelUpdate">
+                </div>
+                <div style="margin: 10px">
+                    <input type="number" placeholder="input price" id="priceUpdate">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="update">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" hidden id="showDelete" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#deleteId">
+    DELETE
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">delete phone</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="margin: 10px">
+                    <input hidden type="text" placeholder="input producer" id="idDelete">
+                </div>
+                <div style="margin: 10px">
+                    <input type="text" placeholder="input producer" id="producerDelete">
+                </div>
+                <div style="margin: 10px">
+                    <input type="text" placeholder="input model" id="modelDelete">
+                </div>
+                <div style="margin: 10px">
+                    <input type="number" placeholder="input price" id="priceDelete">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="delete">delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 <script>
     $(document).ready(function () {
-        $("#divEdit").hide();
+
         $("tbody").empty();
         $.ajax({
             url: "http://localhost:8080/smartPhone",
@@ -75,11 +152,14 @@
                     str.push("<td>" + data[i].producer + "</td>");
                     str.push("<td>" + data[i].model + "</td>");
                     str.push("<td>" + data[i].price + "</td>");
+                    str.push("<td class='update'>" + "<span hidden >" + data[i].id + "</span>" + "<button >Update</button>" + "</td>");
+                    str.push("<td class='delete'>" + "<span hidden >" + data[i].id + "</span>" + "<button >delete</button>" + "</td>");
                     str.push("</tr>");
                 }
                 $("table").append(str.join(""));
             }
         })
+
 
         $("#createPhone").click(function () {
             let producer = $("#producer").val();
@@ -95,7 +175,6 @@
                     $('#modalCreate').modal('hide');
                     $("tbody").empty();
                     $("tbody").append("loading....");
-                    $("tbody").empty();
                     $.ajax({
                         url: "http://localhost:8080/smartPhone",
                         type: "GET",
@@ -103,12 +182,12 @@
                         success: function (data) {
                             let str = [];
                             for (let i = 0; i < data.length; i++) {
-                                str.push("<tr>");
+                                str.push("<tr class='myTr'>");
                                 str.push("<td hidden>" + data[i].id + "</td>");
                                 str.push("<td>" + data[i].producer + "</td>");
                                 str.push("<td>" + data[i].model + "</td>");
                                 str.push("<td>" + data[i].price + "</td>");
-
+                                str.push("<td class='update'>" + "<span hidden >" + data[i].id + "</span>" + "<button >Update</button>" + "</td>");
                                 str.push("</tr>");
                             }
                             $("table").append(str.join(""));
@@ -118,14 +197,122 @@
             })
         })
 
-        $(document).on('click', '.myTr', function () {
+        $(document).on('click', '.update', function () {
             let id = $(this).find(":first-child").text();
-            alert(id);
+            $.ajax({
+                url: "http://localhost:8080/smartPhone/" + id,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    $("#idUpdate").val(data.id);
+                    $("#producerUpdate").val(data.producer);
+                    $("#modelUpdate").val(data.model);
+                    $("#priceUpdate").val(data.price);
+
+                    $('#showUpdate').click();
+                }
+            })
         })
+
+        $("#update").click(function () {
+            let id = $("#idUpdate").val();
+            let producer = $("#producerUpdate").val();
+            let model = $("#modelUpdate").val();
+            let price = $("#priceUpdate").val();
+            $.ajax({
+                url: "http://localhost:8080/smartPhone/update/" + id,
+                type: "PATCH",
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({'producer': producer, 'model': model, 'price': price}),
+                success: function () {
+                    $('#modalCreate').modal('hide');
+                    $("tbody").empty();
+                    $("tbody").append("loading....");
+                    $("tbody").empty();
+                    $.ajax({
+                        url: "http://localhost:8080/smartPhone",
+                        type: "GET",
+                        dataType: "json",
+                        success: function (data) {
+                            let str = [];
+                            for (let i = 0; i < data.length; i++) {
+                                str.push("<tr class='myTr'>");
+                                str.push("<td hidden>" + data[i].id + "</td>");
+                                str.push("<td>" + data[i].producer + "</td>");
+                                str.push("<td>" + data[i].model + "</td>");
+                                str.push("<td>" + data[i].price + "</td>");
+                                str.push("<td class='update'>" + "<span hidden >" + data[i].id + "</span>" + "<button >Update</button>" + "</td>");
+                                str.push("</tr>");
+                            }
+                            $("table").append(str.join(""));
+                        }
+                    })
+
+                }
+            })
+        })
+        $(document).on('click', '.delete', function () {
+            let id = $(this).find(":first-child").text();
+            $.ajax({
+                url: "http://localhost:8080/smartPhone/" + id,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    $("#idDelete").val(data.id);
+                    $("#producerDelete").val(data.producer);
+                    $("#modelDelete").val(data.model);
+                    $("#priceDelete").val(data.price);
+
+                    $('#showDelete').click();
+                }
+            })
+        })
+        $("#delete").click(function () {
+            let id = $("#idDelete").val();
+            let producer = $("#producerDelete").val();
+            let model = $("#modelDelete").val();
+            let price = $("#priceDelete").val();
+            $.ajax({
+                url: "http://localhost:8080/smartPhone/" + id,
+                type: "DELETE",
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({'producer': producer, 'model': model, 'price': price}),
+                success: function () {
+                    $('#modalCreate').modal('hide');
+                    $("tbody").empty();
+                    $("tbody").append("loading....");
+                    $("tbody").empty();
+                    $.ajax({
+                        url: "http://localhost:8080/smartPhone",
+                        type: "GET",
+                        dataType: "json",
+                        success: function (data) {
+                            let str = [];
+                            for (let i = 0; i < data.length; i++) {
+                                str.push("<tr class='myTr'>");
+                                str.push("<td hidden>" + data[i].id + "</td>");
+                                str.push("<td>" + data[i].producer + "</td>");
+                                str.push("<td>" + data[i].model + "</td>");
+                                str.push("<td>" + data[i].price + "</td>");
+                                str.push("<td class='update'>" + "<span hidden >" + data[i].id + "</span>" + "<button >Update</button>" + "</td>");
+                                str.push("<td class='delete'>" + "<span hidden >" + data[i].id + "</span>" + "<button >Update</button>" + "</td>");
+                                str.push("</tr>");
+                            }
+                            $("table").append(str.join(""));
+                        }
+                    })
+
+                }
+            })
+        })
+
     })
 
 
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
         crossorigin="anonymous"></script>
