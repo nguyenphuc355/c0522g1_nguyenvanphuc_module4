@@ -19,7 +19,7 @@ import java.util.Optional;
 @RequestMapping("/shop")
 public class ProductController {
 
-    /* khởi tạo giá trị mặc định cho session*/
+    /* khởi tạo giá trị mặc định cho session */
     @ModelAttribute("cart")
     public CartDto initCart() {
         return new CartDto();

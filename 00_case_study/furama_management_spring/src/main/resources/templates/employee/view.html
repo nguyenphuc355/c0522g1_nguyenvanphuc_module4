@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>view</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        #form {
+            margin-left: 40%;
+            width: 40%;
+
+        }
+    </style>
+</head>
+<body>
+<head th:insert="/index :: head"></head>
+<form id="form">
+    <h2>View Employee</h2>
+    <div><a th:href="@{/employee}"><i class="fa-sharp fa-solid fa-house-user"></i>Back To Employee List</a></div>
+    <div id="detail">
+        <div>
+            <label><b>-Name: </b></label>
+            <label th:text="${employeeList.name}"></label>
+        </div>
+        <div>
+            <label><b>-Birthday:</b> </label>
+            <label th:text="${employeeList.dateOfBirth}"></label>
+        </div>
+        <div>
+            <label><b>-ID Card: </b></label>
+            <label th:text="${employeeList.idCard}"></label>
+        </div>
+        <div>
+            <label><b>-Salary: </b></label>
+            <label th:text="${employeeList.salary}"></label>
+        </div>
+        <div>
+            <label><b>-Phone: </b></label>
+            <label th:text="${employeeList.phoneNumber}"></label>
+        </div>
+        <div>
+            <label><b>-Email: </b></label>
+            <label th:text="${employeeList.email}"></label>
+        </div>
+        <div>
+            <label><b>-Address:</b> </label>
+            <label th:text="${employeeList.address}"></label>
+        </div>
+        <div>
+            <label><b>-Division: </b></label>
+            <label th:if="${employeeList.division}" th:text="${employeeList.division.name}"></label>
+            <label th:unless="${employeeList.division}"></label>
+        </div>
+        <div>
+            <label><b>-EducationDegree: </b></label>
+            <label th:if="${employeeList.educationDegree}" th:text="${employeeList.educationDegree.name}"></label>
+            <label th:unless="${employeeList.educationDegree}"></label>
+        </div>
+        <div>
+            <label><b>-Position: </b></label>
+            <label th:if="${employeeList.position}" th:text="${employeeList.position.name}"></label>
+            <label th:unless="${employeeList.position}"></label>
+        </div>
+    </div>
+</form>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</html>

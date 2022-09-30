@@ -17,7 +17,12 @@ public class LogAspect {
     @Pointcut("within(book_loan_app.controller.BookController*) ")
     public void allMethodPointCut() {
     }
-
+    @Before("allMethodPointCut()")
+    public void beforeCallMethod(JoinPoint joinPoint){
+        System.out.printf("Start method name : "
+                +joinPoint.getSignature().getName()
+                +" Time: " + LocalDateTime.now());
+    }
     @AfterReturning("allMethodPointCut()")
     public void afterCallMethod(JoinPoint joinPoint) {
         counts++;
