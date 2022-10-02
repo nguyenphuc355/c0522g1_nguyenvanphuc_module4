@@ -1,13 +1,11 @@
 package furama_managemrnt.controller;
 
-import furama_managemrnt.dto.CustomerDto;
 import furama_managemrnt.dto.EmployeeDto;
-import furama_managemrnt.model.Customer;
-import furama_managemrnt.model.Employee;
-import furama_managemrnt.serrvice.IDivisionService;
-import furama_managemrnt.serrvice.IEducationDegreeService;
-import furama_managemrnt.serrvice.IEmployeeService;
-import furama_managemrnt.serrvice.IPositionService;
+import furama_managemrnt.model.employee.Employee;
+import furama_managemrnt.serrvice.employeeService.IDivisionService;
+import furama_managemrnt.serrvice.employeeService.IEducationDegreeService;
+import furama_managemrnt.serrvice.employeeService.IEmployeeService;
+import furama_managemrnt.serrvice.employeeService.IPositionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -73,16 +71,16 @@ public class EmployeeController {
         return "redirect:/employee";
     }
 
-    @GetMapping("delete/{id}")
-    public String showDelete(@PathVariable int id, Model model) {
-        model.addAttribute("employeeList", employeeService.findById(id));
-        return "employee/delete";
-    }
+//    @GetMapping("delete/{id}")
+//    public String showDelete(@PathVariable int id, Model model) {
+//        model.addAttribute("employeeList", employeeService.findById(id));
+//        return "employee/delete";
+//    }
 
     @PostMapping("/delete")
-    public String delete(Employee employee, RedirectAttributes redirect) {
-        employeeService.remove(employee.getId());
-        redirect.addFlashAttribute("success", "Removed product successfully!");
+    public String delete(@RequestParam("idDelete") int id, RedirectAttributes redirect) {
+        employeeService.remove(id);
+        redirect.addFlashAttribute("mess", "Removed employee successfully!");
         return "redirect:/employee";
     }
 
@@ -102,13 +100,14 @@ public class EmployeeController {
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute @Validated EmployeeDto employeeDto, BindingResult bindingResult) {
+    public String update(@ModelAttribute @Validated EmployeeDto employeeDto, BindingResult bindingResult,RedirectAttributes redirectAttributes) {
         if (bindingResult.hasFieldErrors()) {
             return "employee/edit";
         }
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDto, employee);
         employeeService.update(employee);
+        redirectAttributes.addFlashAttribute("mess", "Update employee successfully!");
         return "redirect:/employee";
     }
 

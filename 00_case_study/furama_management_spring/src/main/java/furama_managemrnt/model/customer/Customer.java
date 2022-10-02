@@ -1,48 +1,32 @@
-package furama_managemrnt.dto;
+package furama_managemrnt.model.customer;
 
-import furama_managemrnt.model.customer.CustomerType;
+import javax.persistence.*;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-
-
-public class CustomerDto {
-
+@Entity
+public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotBlank(message = "không được để trống")
-    @Pattern(regexp = "^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$", message = "tên phải đúng định dạng, không chứa kí tự đặc biệt")
     private String name;
-
-    @NotBlank(message = "không được trống")
+    @Column(columnDefinition = "Date")
     private String dateOfBirth;
-
-
     private int gender;
-
-    @NotBlank(message = "không được trống")
     private String idCard;
-
-    @NotBlank(message = "không được trống")
-    @Pattern(regexp = "^((\\(\\+84\\-\\))|0)[0-9]{9}$",message = "nhập đúng định dạng 0xxxxxxxxx")
     private String phoneNumber;
-
-    @NotBlank(message = "không được trống")
-    @Email(message = "nhập đúng định dạng xxxx@.xxx")
     private String email;
-
-    @NotBlank(message = "không được trống")
-    @Pattern(regexp = "^([\\p{Lu}/,-][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$", message = "tên phải đúng định dạng, không chứa kí tự đặc biệt")
     private String address;
+    private boolean isDelete;
 
+    @ManyToOne
+    @JoinColumn(name = "customerType_id", referencedColumnName = "id")
     private CustomerType customerType;
 
-    public CustomerDto() {
+    public Customer() {
     }
 
-    public CustomerDto(int id, String name, String dateOfBirth,
-                       int gender, String idCard, String phoneNumber,
-                       String email, String address, CustomerType customerType) {
+    public Customer(int id, String name, String dateOfBirth, int gender,
+                    String idCard, String phoneNumber, String email,
+                    String address, boolean isDelete, CustomerType customerType) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -51,7 +35,16 @@ public class CustomerDto {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
+        this.isDelete = isDelete;
         this.customerType = customerType;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 
     public int getId() {

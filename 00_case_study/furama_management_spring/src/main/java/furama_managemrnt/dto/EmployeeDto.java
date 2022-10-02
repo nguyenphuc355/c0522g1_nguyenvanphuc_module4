@@ -1,9 +1,9 @@
 package furama_managemrnt.dto;
 
 
-import furama_managemrnt.model.Division;
-import furama_managemrnt.model.EducationDegree;
-import furama_managemrnt.model.Position;
+import furama_managemrnt.model.employee.Division;
+import furama_managemrnt.model.employee.EducationDegree;
+import furama_managemrnt.model.employee.Position;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

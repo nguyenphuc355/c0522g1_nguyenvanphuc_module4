@@ -1,9 +1,11 @@
-package furama_managemrnt.dto;
+package furama_managemrnt.model.facility;
 
-import furama_managemrnt.model.facility.FacilityType;
-import furama_managemrnt.model.facility.RenType;
+import javax.persistence.*;
 
-public class FacilityDto {
+@Entity
+public class Facility {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String area;
@@ -13,16 +15,24 @@ public class FacilityDto {
     private String descriptionOtherConvenience;
     private String poulArea;
     private Integer numberOfFloors;
+    @Column(columnDefinition = "text")
     private String facilityFree;
+    private boolean isDelete;
+
+    @ManyToOne
+    @JoinColumn(name = "facility_type_id", referencedColumnName = "id")
     private FacilityType facilityTypeS;
+
+    @ManyToOne
+    @JoinColumn(name = "rent_type_id",referencedColumnName = "id")
     private RenType renType;
 
-    public FacilityDto() {
+    public Facility() {
     }
 
-    public FacilityDto(int id, String name, String area, String cost, Integer maxPeople, String standardRoom,
-                       String descriptionOtherConvenience, String poulArea, Integer numberOfFloors,
-                       String facilityFree, FacilityType facilityTypeS, RenType renType) {
+    public Facility(int id, String name, String area, String cost, Integer maxPeople,
+                    String standardRoom, String descriptionOtherConvenience,
+                    String poulArea, Integer numberOfFloors, String facilityFree) {
         this.id = id;
         this.name = name;
         this.area = area;
@@ -33,8 +43,14 @@ public class FacilityDto {
         this.poulArea = poulArea;
         this.numberOfFloors = numberOfFloors;
         this.facilityFree = facilityFree;
-        this.facilityTypeS = facilityTypeS;
-        this.renType = renType;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 
     public int getId() {

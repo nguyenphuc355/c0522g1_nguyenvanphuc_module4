@@ -1,9 +1,9 @@
 package furama_managemrnt.controller;
 
 import furama_managemrnt.dto.CustomerDto;
-import furama_managemrnt.model.Customer;
-import furama_managemrnt.repository.ICustomerTypeRepository;
-import furama_managemrnt.serrvice.ICustomerService;
+import furama_managemrnt.model.customer.Customer;
+import furama_managemrnt.repository.customerRepository.ICustomerTypeRepository;
+import furama_managemrnt.serrvice.customerService.ICustomerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -54,16 +54,17 @@ public class CustomerController {
         return "redirect:/customer";
     }
 
-    @GetMapping("delete/{id}")
-    public String showDelete(@PathVariable int id, Model model) {
-        model.addAttribute("customerList", customerService.findById(id));
-        return "customer/delete";
-    }
+//    @GetMapping("delete/{id}")
+//    public String showDelete(@PathVariable int id, Model model) {
+//        model.addAttribute("customerList", customerService.findById(id));
+//        return "customer/delete";
+//    }
 
-    @PostMapping("/delete")
-    public String delete(Customer customer, RedirectAttributes redirect) {
-        customerService.remove(customer.getId());
-        redirect.addFlashAttribute("success", "Removed product successfully!");
+    @GetMapping("/delete")
+    public String delete(@RequestParam(value = "idDelete") int id, RedirectAttributes redirect) {
+//        customerService.deleteCustomer(id);
+        customerService.delete(id);
+        redirect.addFlashAttribute("mess", "Removed Customer successfully!");
         return "redirect:/customer";
     }
 
@@ -81,8 +82,9 @@ public class CustomerController {
     }
 
     @PostMapping("/update")
-    public String update(Customer customer) {
+    public String update(Customer customer,RedirectAttributes redirectAttributes) {
         customerService.update(customer);
+        redirectAttributes.addFlashAttribute("mess", "Update Customer successfully!");
         return "redirect:/customer";
     }
 
