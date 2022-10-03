@@ -14,10 +14,6 @@
 <div class="p-3">
     <h2 class="text-center fw-bold my-3">CONTRACT LIST</h2>
 
-    <!--    <p class="text-center mt-3">-->
-    <!--        <a th:href="@{/}"><i class="fa-solid fa-house-chimney h5 mx-1"></i> Quay lại trang chủ</a>-->
-    <!--    </p>-->
-
     <div th:if="${message}">
         <div class="justify-content-center d-flex">
             <div class="alert alert-success alert-dismissible fade show w-50 text-center">
@@ -81,38 +77,6 @@
         <a th:href="@{'/contract'(page=${contractList.number + 1},name=${name})}"
            th:if="${contractList.hasNext()}">Next<i class="fa-solid fa-forward"></i></a>
     </div>
-    <!--    <nav aria-label="...">-->
-    <!--        <ul class="pagination">-->
-    <!--            <li class="page-item">-->
-    <!--                <a class="page-link" th:href="@{'/contract'(page=${contractList.number - 1})}"-->
-    <!--                   th:if="${contractList.hasPrevious()}">&laquo;</a>-->
-    <!--            </li>-->
-    <!--            <li class="page-item disabled" th:unless="${contractList.hasPrevious()}">-->
-    <!--                <a class="page-link">&laquo;</a>-->
-    <!--            </li>-->
-
-    <!--            <li class="page-item"><a class="page-link" th:href="@{'/contract'(page=${contractList.number - 1})}"-->
-    <!--                                     th:if="${contractList.hasPrevious()}" th:text="${contractList.number}"></a>-->
-    <!--            </li>-->
-
-    <!--            <li class="page-item active">-->
-    <!--                <a class="page-link" th:href="@{'/contract'(page=${contractList.number})}"-->
-    <!--                   th:text="${contractList.number + 1}"><span class="sr-only">(trang hiện tại)</span></a>-->
-    <!--            </li>-->
-
-    <!--            <li class="page-item"><a class="page-link" th:href="@{'/contract'(page=${contractList.number + 1})}"-->
-    <!--                                     th:if="${contractList.hasNext()}" th:text="${contractList.number + 2}"></a>-->
-    <!--            </li>-->
-
-    <!--            <li class="page-item">-->
-    <!--                <a class="page-link" th:href="@{'/contract'(page=${contractList.number + 1})}"-->
-    <!--                   th:if="${contractList.hasNext()}">&raquo;</a>-->
-    <!--            </li>-->
-    <!--            <li class="page-item disabled" th:unless="${contractList.hasNext()}">-->
-    <!--                <a class="page-link">&raquo;</a>-->
-    <!--            </li>-->
-    <!--        </ul>-->
-    <!--    </nav>-->
 </div>
 <div class="modal fade" id="addContract" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
@@ -256,19 +220,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body">
-                <table>
-<!--                    <tr>-->
-<!--                        <th>Tên dịch vụ</th>-->
-<!--                        <th>Số lượng</th>-->
-<!--                    </tr>-->
+            <div class="modal-body"></div>
 
-<!--                    <tr th:each="item : ${contractDetailList}" th:if="${item.contract.id == ${'#contractId'}}">-->
-<!--                        <td class="h6 pe-3" th:text="${item.attachFacility.name}"></td>-->
-<!--                        <td th:text="${item.quantity}"></td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-            </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

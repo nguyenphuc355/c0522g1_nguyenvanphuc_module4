@@ -21,7 +21,7 @@
     <button class="btn btn-primary btn-outline-secondary btn-sm col-lg-2" data-bs-toggle="modal"
             data-bs-target="#addEmployee">
         <span class="fa-solid fa-person-circle-plus text-light h5 my-auto me-1"></span>
-        <span class="text-light"> Thêm mới nhân viên</span>
+        <span class="text-light"> Add new Employee</span>
     </button>
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
@@ -84,7 +84,7 @@
                 '${employee.educationDegree.id}', '${employee.division.id}')|"
                     class="btn btn-warning btn-outline-secondary btn-sm" data-bs-toggle="modal"
                     data-bs-target="#editEmployee">
-                <span class="fa-solid fa-user text-light h6 m-auto px-2"></span>
+                <span class="fa-solid fa-pencil text-light h6 m-auto px-2"></span>
             </button>
         </td>
         <td class="text-center">
@@ -112,18 +112,18 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel1">Bạn có chắc chắn muốn xóa?</h4>
+                <h4 class="modal-title" id="exampleModalLabel1">Are you sure you want to delete?</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form th:action="@{/employee/delete}" method="POST">
                 <div class="modal-body">
-                    <span class="h6">Nhân Viên:</span><strong id="nameDelete" class="text-danger ps-2"></strong>
+                    <span class="h6">Employee:</span><strong id="nameDelete" class="text-danger ps-2"></strong>
                     <input type="hidden" name="idDelete" id="idDelete" readonly/>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-danger" value="delete">Xóa</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger" value="delete">Delete</button>
                 </div>
             </form>
         </div>
@@ -134,34 +134,34 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-center" id="exampleModalLabel2">Thông tin nhân viên</h4>
+                <h4 class="modal-title text-center" id="exampleModalLabel2">Employee Information</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body" style="background-color: #f2f2f2">
                 <table>
                     <tr>
-                        <td class="h6 pe-3">Tên nhân viên:</td>
+                        <td class="h6 pe-3">Employee Name:</td>
                         <td id="name" class="text-primary h6"></td>
                     </tr>
 
                     <tr>
-                        <td class="h6 pe-3">Ngày sinh:</td>
+                        <td class="h6 pe-3">Date Of Birth:</td>
                         <td id="birthday" class="text-primary"></td>
                     </tr>
 
                     <tr>
-                        <td class="h6 pe-3">Số CMND/CCCD:</td>
+                        <td class="h6 pe-3">Id Card:</td>
                         <td id="idCard" class="text-primary"></td>
                     </tr>
 
                     <tr>
-                        <td class="h6 pe-3">Lương:</td>
+                        <td class="h6 pe-3">Salary:</td>
                         <td id="salary" class="text-primary"></td>
                     </tr>
 
                     <tr>
-                        <td class="h6 pe-3">Số điện thoại:</td>
+                        <td class="h6 pe-3">Phone Number:</td>
                         <td id="phone" class="text-primary"></td>
                     </tr>
 
@@ -171,29 +171,29 @@
                     </tr>
 
                     <tr>
-                        <td class="h6 pe-3">Địa chỉ:</td>
+                        <td class="h6 pe-3">Address:</td>
                         <td id="address" class="text-primary"></td>
                     </tr>
 
                     <tr>
-                        <td class="h6 pe-3">Trình độ học vấn:</td>
+                        <td class="h6 pe-3">Education Degree:</td>
                         <td id="educationDegree" class="text-primary"></td>
                     </tr>
 
                     <tr>
-                        <td class="h6 pe-3">Bộ phận:</td>
+                        <td class="h6 pe-3">Division:</td>
                         <td id="division" class="text-primary"></td>
                     </tr>
 
                     <tr>
-                        <td class="h6 pe-3">Vị trí:</td>
+                        <td class="h6 pe-3">Position:</td>
                         <td id="position" class="text-primary"></td>
                     </tr>
                 </table>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -204,13 +204,13 @@
             <form class="border border-2 border-success p-3 rounded formCSS" th:action="@{/employee/save}"
                   th:object="${employeeDto}" method="POST">
                 <div class="modal-header">
-                    <h3 class="modal-title fw-bold" id="exampleModalLabel3">THÊM MỚI NHÂN VIÊN</h3>
+                    <h3 class="modal-title fw-bold" id="exampleModalLabel3">ADD NEW EMPLOYEE</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="nameAdd" class="h6">Tên nhân viên:</label>
+                        <label for="nameAdd" class="h6">employee Name:</label>
                         <p style="color: red" th:if="${#fields.hasErrors('name')}"
                            th:errors="*{name}"></p>
                         <div class="input-group">
@@ -223,14 +223,14 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label for="dateOfBirth" class="h6">Ngày sinh:</label>
+                        <label for="dateOfBirth" class="h6">Date Of Birth:</label>
                         <p style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}"
                            th:errors="*{dateOfBirth}"></p>
                         <input type="date" id="dateOfBirth" class="form-control" th:field="*{dateOfBirth}"/>
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label for="idCardAdd" class="h6">Số CMND/CCCD:</label>
+                        <label for="idCardAdd" class="h6">Id Card</label>
                         <p style="color: red" th:if="${#fields.hasErrors('idCard')}"
                            th:errors="*{idCard}"></p>
                         <div class="input-group">
@@ -242,7 +242,7 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label for="salaryAdd" class="h6">Lương (VNĐ):</label>
+                        <label for="salaryAdd" class="h6">Salary (VNĐ):</label>
                         <div class="input-group">
                             <input type="number" id="salaryAdd" class="form-control" placeholder="Nhập lương..."
                                    th:field="*{salary}" required pattern="^[1-9]\d*$"
@@ -252,7 +252,7 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label for="phoneAdd" class="h6">Số điện thoại:</label>
+                        <label for="phoneAdd" class="h6">Phone Number:</label>
                         <div class="input-group">
                             <input type="text" id="phoneAdd" class="form-control" placeholder="Nhập SĐT.."
                                    th:field="*{phoneNumber}" required pattern="^(0|[(]84[)][+])9[01]\d{7}$"
@@ -273,7 +273,7 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label for="addressAdd" class="h6">Địa chỉ:</label>
+                        <label for="addressAdd" class="h6">Address:</label>
                         <div class="input-group">
                             <input type="text" id="addressAdd" class="form-control" placeholder="Nhập địa chỉ.."
                                    th:field="*{address}" required pattern="^.+$"
@@ -283,7 +283,7 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label class="h6" for="positionAdd">Vị trí:</label>
+                        <label class="h6" for="positionAdd">Position:</label>
                         <div class="input-group">
                             <select id="positionAdd" class="form-control" th:field="*{position.id}">
                                 <option th:each="item : ${positionList}" th:value="${item.id}"
@@ -294,7 +294,7 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label class="h6" for="educationDegreeAdd">Trình độ học vấn:</label>
+                        <label class="h6" for="educationDegreeAdd">Education Degree:</label>
                         <div class="input-group">
                             <select id="educationDegreeAdd" class="form-control"
                                     th:field="*{educationDegree.id}">
@@ -306,7 +306,7 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label class="h6" for="divisionAdd">Bộ phận:</label>
+                        <label class="h6" for="divisionAdd">Division:</label>
                         <div class="input-group">
                             <select id="divisionAdd" class="form-control" th:field="*{division.id}">
                                 <option th:each="item : ${divisionList}" th:value="${item.id}"
@@ -318,8 +318,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-success">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Save</button>
                 </div>
             </form>
         </div>
@@ -331,7 +331,7 @@
             <form class="border border-2 border-success p-3 rounded formCSS" th:action="@{/employee/update}"
                   th:object="${employeeDto}" method="POST">
                 <div class="modal-header">
-                    <h3 class="modal-title fw-bold" id="exampleModalLabel4">CHỈNH SỬA NHÂN VIÊN</h3>
+                    <h3 class="modal-title fw-bold" id="exampleModalLabel4">EDIT EMPLOYEE</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="input-group">
@@ -339,7 +339,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="nameEdit" class="h6">Tên nhân viên:</label>
+                        <label for="nameEdit" class="h6">Employee Name:</label>
                         <p style="color: red" th:if="${#fields.hasErrors('name')}"
                            th:errors="*{name}"></p>
                         <div class="input-group">
@@ -352,14 +352,14 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label for="dateOfBirthEdit" class="h6">Ngày sinh:</label>
+                        <label for="dateOfBirthEdit" class="h6">Date Of Birth:</label>
                         <p style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}"
                            th:errors="*{dateOfBirth}"></p>
                         <input type="date" id="dateOfBirthEdit" class="form-control" th:field="*{dateOfBirth}"/>
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label for="idCardEdit" class="h6">Số CMND/CCCD:</label>
+                        <label for="idCardEdit" class="h6">Id Card:</label>
                         <p style="color: red" th:if="${#fields.hasErrors('idCard')}"
                            th:errors="*{idCard}"></p>
                         <div class="input-group">
@@ -371,7 +371,7 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label for="salaryEdit" class="h6">Lương (VNĐ):</label>
+                        <label for="salaryEdit" class="h6">Salary (VNĐ):</label>
                         <div class="input-group">
                             <input type="number" id="salaryEdit" class="form-control" placeholder="Nhập lương..."
                                    th:field="*{salary}" required pattern="^[1-9]\d*$"
@@ -381,7 +381,7 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label for="phoneEdit" class="h6">Số điện thoại:</label>
+                        <label for="phoneEdit" class="h6">Phone Number:</label>
                         <div class="input-group">
                             <input type="text" id="phoneEdit" class="form-control" placeholder="Nhập SĐT.."
                                    th:field="*{phoneNumber}" required pattern="^(0|[(]84[)][+])9[01]\d{7}$"
@@ -402,7 +402,7 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label for="addressEdit" class="h6">Địa chỉ:</label>
+                        <label for="addressEdit" class="h6">Address:</label>
                         <div class="input-group">
                             <input type="text" id="addressEdit" class="form-control" placeholder="Nhập địa chỉ.."
                                    th:field="*{address}" required pattern="^.+$"
@@ -412,7 +412,7 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label class="h6" for="positionEdit">Vị trí:</label>
+                        <label class="h6" for="positionEdit">Position:</label>
                         <div class="input-group">
                             <select id="positionEdit" class="form-control" th:field="*{position.id}">
                                 <option th:each="item : ${positionList}" th:value="${item.id}"
@@ -423,7 +423,7 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label class="h6" for="educationDegreeEdit">Trình độ học vấn:</label>
+                        <label class="h6" for="educationDegreeEdit">Education Degree:</label>
                         <div class="input-group">
                             <select id="educationDegreeEdit" class="form-control"
                                     th:field="*{educationDegree.id}">
@@ -435,7 +435,7 @@
                     </div>
 
                     <div class="mt-3 form-group">
-                        <label class="h6" for="divisionEdit">Bộ phận:</label>
+                        <label class="h6" for="divisionEdit">Division:</label>
                         <div class="input-group">
                             <select id="divisionEdit" class="form-control" th:field="*{division.id}">
                                 <option th:each="item : ${divisionList}" th:value="${item.id}"
@@ -447,8 +447,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-success">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Save</button>
                 </div>
             </form>
         </div>
