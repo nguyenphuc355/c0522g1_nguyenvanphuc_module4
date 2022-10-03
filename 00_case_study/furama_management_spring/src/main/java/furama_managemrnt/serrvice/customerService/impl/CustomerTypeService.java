@@ -1,4 +1,4 @@
-package furama_managemrnt.serrvice.impl.customer;
+package furama_managemrnt.serrvice.customerService.impl;
 
 import furama_managemrnt.model.customer.CustomerType;
 import furama_managemrnt.repository.customerRepository.ICustomerTypeRepository;

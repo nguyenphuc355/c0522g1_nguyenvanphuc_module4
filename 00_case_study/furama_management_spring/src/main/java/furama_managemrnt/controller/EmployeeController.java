@@ -34,26 +34,28 @@ public class EmployeeController {
     public String search(@RequestParam(value = "name", defaultValue = "") String name,
                          @RequestParam(value = "phoneNumber", defaultValue = "") String phoneNumber,
                          @RequestParam(value = "address", defaultValue = "") String address,
-                         @PageableDefault(value = 5) Pageable pageable, Model model) {
+                         @PageableDefault(value = 5) Pageable pageable
+            , Model model) {
         model.addAttribute("educationDegreeList", educationDegreeService.findAll());
         model.addAttribute("divisionList", divisionService.findAll());
         model.addAttribute("positionList", positionService.findAll());
         model.addAttribute("employeeList", employeeService.findByName(pageable, name, phoneNumber, address));
+        model.addAttribute("employeeDto", new EmployeeDto());
         model.addAttribute("name", name);
         model.addAttribute("phoneNumber", phoneNumber);
         model.addAttribute("address", address);
         return "employee/list";
     }
 
-    @GetMapping("/create")
-    public String showCreate(Model model) {
-        model.addAttribute("divisionList", divisionService.findAll());
-        model.addAttribute("educationDegreeList", educationDegreeService.findAll());
-        model.addAttribute("positionList", positionService.findAll());
-        model.addAttribute("employeeDto", new EmployeeDto());
-        return "employee/create";
-
-    }
+//    @GetMapping("/create")
+//    public String showCreate(Model model) {
+//        model.addAttribute("divisionList", divisionService.findAll());
+//        model.addAttribute("educationDegreeList", educationDegreeService.findAll());
+//        model.addAttribute("positionList", positionService.findAll());
+//        model.addAttribute("employeeDto", new EmployeeDto());
+//        return "employee/create";
+//
+//    }
 
     @PostMapping("/save")
     public String saveEmployee(@ModelAttribute @Validated EmployeeDto employeeDto, BindingResult bindingResult,
@@ -89,19 +91,23 @@ public class EmployeeController {
         model.addAttribute("employeeList", employeeService.findById(id));
         return "employee/view";
     }
-
-    @GetMapping("edit/{id}")
-    public String edit(@PathVariable int id, Model model) {
-        model.addAttribute("employeeDto", employeeService.findById(id));
-        model.addAttribute("educationDegreeList", educationDegreeService.findAll());
-        model.addAttribute("divisionList", divisionService.findAll());
-        model.addAttribute("positionList", positionService.findAll());
-        return "employee/edit";
-    }
+//
+//    @GetMapping("edit/{id}")
+//    public String edit(@PathVariable int id, Model model) {
+//        model.addAttribute("employeeDto", employeeService.findById(id));
+//        model.addAttribute("educationDegreeList", educationDegreeService.findAll());
+//        model.addAttribute("divisionList", divisionService.findAll());
+//        model.addAttribute("positionList", positionService.findAll());
+//        return "employee/edit";
+//    }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute @Validated EmployeeDto employeeDto, BindingResult bindingResult,RedirectAttributes redirectAttributes) {
+    public String update(@ModelAttribute @Validated EmployeeDto employeeDto, BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("divisionList", divisionService.findAll());
+            model.addAttribute("educationDegreeList", educationDegreeService.findAll());
+            model.addAttribute("positionList", positionService.findAll());
             return "employee/edit";
         }
         Employee employee = new Employee();

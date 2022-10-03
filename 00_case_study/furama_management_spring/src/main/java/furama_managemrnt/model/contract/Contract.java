@@ -17,6 +17,7 @@ public class Contract {
     @Column(columnDefinition = "DATE")
     private String endDay;
     private double deposit;
+    private boolean isDelete;
 
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
@@ -105,5 +106,13 @@ public class Contract {
 
     public void setContractDetails(Set<ContractDetail> contractDetails) {
         this.contractDetails = contractDetails;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 }

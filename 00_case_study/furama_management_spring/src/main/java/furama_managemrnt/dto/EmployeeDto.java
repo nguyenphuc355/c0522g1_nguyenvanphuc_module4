@@ -35,7 +35,7 @@ public class EmployeeDto {
     private String email;
 
     @NotBlank(message = "không được trống")
-    @Pattern(regexp = "^([\\p{Lu}/,-][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$", message = "tên phải đúng định dạng, không chứa kí tự đặc biệt")
+//    @Pattern(regexp = "^([\\p{Lu}/,-][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$", message = "tên phải đúng định dạng, không chứa kí tự đặc biệt")
     private String address;
 
     private Division division;

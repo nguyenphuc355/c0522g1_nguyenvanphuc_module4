@@ -20,4 +20,5 @@ public interface IEmployeeService {
     Page<Employee> findAll(Pageable pageable);
 
     Page<Employee> findByName(Pageable pageable, String name, String phoneNumber, String address);
+
 }

@@ -1,4 +1,4 @@
-package furama_managemrnt.serrvice.impl.employee;
+package furama_managemrnt.serrvice.employeeService.impl;
 
 import furama_managemrnt.model.employee.Division;
 import furama_managemrnt.repository.employeeRepository.IDivisionRepository;

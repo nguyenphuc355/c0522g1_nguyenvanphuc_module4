@@ -1,4 +1,4 @@
-package furama_managemrnt.serrvice.impl.facility;
+package furama_managemrnt.serrvice.facilityService.impl;
 
 import furama_managemrnt.model.facility.Facility;
 import furama_managemrnt.repository.facilityRepository.IFacilityRepository;

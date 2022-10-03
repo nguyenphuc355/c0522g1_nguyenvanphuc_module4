@@ -16,12 +16,7 @@
         <input type="hidden" th:field="*{id}"/>
         <div id="facilityType">
             <label><b>Choose Service</b></label>
-            <select th:field="*{facilityTypeS.id}">
-                <option th:each=" item :${facilityTypeList}"
-                        th:text="${item.name}"
-                        th:value="${item.id}">
-                </option>
-            </select>
+            <input type="text" readonly th:field="*{facilityTypeS.name}"/>
         </div>
         <div>
             <label><b>facility Name</b></label>
@@ -29,6 +24,7 @@
             <!--            <p style="color: red" th:errors="*{name}"-->
             <!--               th:if="${#fields.hasErrors('name')}"></p>-->
         </div>
+
         <div>
             <label><b>Using Area</b></label>
             <input type="number" th:field="*{area}"/>
@@ -47,37 +43,52 @@
             <!--            <p style="color: red" th:errors="*{maxPeople}"-->
             <!--               th:if="${#fields.hasErrors('maxPeople')}"></p>-->
         </div>
-        <div>
+        <div th:if="${facilityDto.facilityTypeS.id !=3}">
             <label><b>Phone Number</b></label>
             <input type="text" th:field="*{standardRoom}"/>
             <!--            <p style="color: red" th:errors="*{standardRoom}"-->
             <!--               th:if="${#fields.hasErrors('standardRoom')}"></p>-->
         </div>
         <div>
+            <input hidden th:if="${facilityDto.facilityTypeS.id == 3}" th:value="${''}">
+        </div>
+        <div th:if="${facilityDto.facilityTypeS.id !=3}">
             <label><b>Description</b></label>
             <input type="text" th:field="*{descriptionOtherConvenience}"/>
             <!--            <p style="color: red" th:errors="*{descriptionOtherConvenience}"-->
             <!--               th:if="${#fields.hasErrors('descriptionOtherConvenience')}"></p>-->
         </div>
         <div>
+            <input hidden th:if="${facilityDto.facilityTypeS.id == 3}" th:value="${''}">
+        </div>
+        <div th:if="${facilityDto.facilityTypeS.id == 1}">
             <label><b>Pool Area</b></label>
             <input type="text" th:field="*{poulArea}"/>
             <!--            <p style="color: red" th:errors="*{poulArea}"-->
             <!--               th:if="${#fields.hasErrors('poulArea')}"></p>-->
         </div>
         <div>
+            <input hidden th:if="${facilityDto.facilityTypeS.id !=1}" th:value="${''}">
+        </div>
+        <div th:if="${facilityDto.facilityTypeS.id !=3}">
             <label><b>Number Of Floor</b></label>
             <input type="number" th:field="*{numberOfFloors}"/>
             <!--            <p style="color: red" th:errors="*{poulArea}"-->
             <!--               th:if="${#fields.hasErrors('poulArea')}"></p>-->
         </div>
         <div>
+            <input hidden th:if="${facilityDto.facilityTypeS.id == 3}" th:value="${''}">
+        </div>
+        <div th:if="${facilityDto.facilityTypeS.id ==3}">
             <label><b>facility Free</b></label>
             <input type="text" th:field="*{facilityFree}"/>
             <!--            <p style="color: red" th:errors="*{poulArea}"-->
             <!--               th:if="${#fields.hasErrors('poulArea')}"></p>-->
         </div>
-        <div id="rentType">
+        <div>
+            <input hidden th:if="${facilityDto.facilityTypeS.id != 3}" th:value="${''}">
+        </div>
+        <div id="rentType" th:if="${facilityDto.facilityTypeS.id !=3}">
             <label><b>Rent Type</b></label>
             <select th:field="*{renType}">
                 <option th:value="${''}">....</option>
@@ -86,6 +97,9 @@
                         th:value="${item.id}">
                 </option>
             </select>
+        </div>
+        <div>
+            <input hidden th:if="${facilityDto.facilityTypeS.id == 3}" th:value="${''}">
         </div>
 
         <input id="edit" type="submit" value="Edit"/>
