@@ -3,34 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>view</title>
-<style>
-    body{
-        text-align: center;
-    }
-    #form{
-        margin-left: 40%;
-        width: 40%;
+    <style>
+         body {
+             text-align: center;
+             background-repeat: no-repeat;
+             background-size: 100%;
+             background-image: url("https://cdn.pixabay.com/photo/2018/01/08/19/43/desktop-background-3070129__340.jpg")
+         }
 
-    }
-</style>
+        #form {
+            margin-left: 40%;
+            width: 40%;
+
+        }
+    </style>
 </head>
-<body >
 <head th:insert="/index :: head"></head>
+<body style="margin-top: 150px">
 <form id="form">
-    <h2>View Customer</h2>
+    <h2 class="text-light">View Customer</h2>
     <p>
-        <a th:href="@{/customer}">Back to Customer list</a>
+        <a th:href="@{/customer}" class="text-light">Back to Customer list</a>
     </p>
     <div id="detail">
-        <div >
+        <div>
             <label><b>-Name: </b></label>
             <label th:text="${customer.name}"></label>
         </div>
-        <div >
+        <div>
             <label><b>-Birthday:</b> </label>
             <label th:text="${customer.dateOfBirth}"></label>
         </div>
-        <div >
+        <div>
             <label><b>-Gender:</b> </label>
             <label th:switch="${customer.gender}">
                 <span th:case="0">Male</span>
@@ -42,19 +46,19 @@
             <label><b>-ID Card: </b></label>
             <label th:text="${customer.idCard}"></label>
         </div>
-        <div >
+        <div>
             <label><b>-Phone: </b></label>
             <label th:text="${customer.phoneNumber}"></label>
         </div>
-        <div >
+        <div>
             <label><b>-Email: </b></label>
             <label th:text="${customer.email}"></label>
         </div>
-        <div >
+        <div>
             <label><b>-Address:</b> </label>
             <label th:text="${customer.address}"></label>
         </div>
-        <div >
+        <div>
             <label><b>-Customer Type: </b></label>
             <label th:if="${customer.customerType}" th:text="${customer.customerType.name}"></label>
             <label th:unless="${customer.customerType}"></label>

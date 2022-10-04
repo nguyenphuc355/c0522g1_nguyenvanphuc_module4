@@ -7,12 +7,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <style>
+        body {
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-image: url("https://cdn.pixabay.com/photo/2018/01/08/19/43/desktop-background-3070129__340.jpg")
+        }
+    </style>
 </head>
-<body>
-
 <head th:insert="/index :: head"></head>
+<body style="margin-top: 150px">
 <div class="p-3">
-    <h2 class="text-center fw-bold my-3">CONTRACT LIST</h2>
+    <h2 class="text-center text-light fw-bold my-3">CONTRACT LIST</h2>
 
     <div th:if="${message}">
         <div class="justify-content-center d-flex">
@@ -28,13 +34,13 @@
             <button class="btn btn-primary btn-outline-secondary btn-sm" data-bs-toggle="modal"
                     data-bs-target="#addContract">
                 <span class="fa-solid fa-person-circle-plus text-light h5 my-auto me-1"></span>
-                <span class="text-light">Add new Contract</span>
+                <span class="text-light">Add New Contract</span>
             </button>
         </div>
     </div>
 
-    <table class="table table-light table-striped table-bordered">
-        <tr class="table-dark text-light">
+    <table class="table  table-striped table-bordered">
+        <tr class="bg-primary">
             <th class="text-center">#</th>
             <th>facility Name</th>
             <th>Employee Name</th>
@@ -47,7 +53,7 @@
         </tr>
 
         <tr th:each="contract, status : ${contractList}">
-            <td class="text-center" th:text="${status.count}"></td>
+            <td class="text-center" th:text="${contractList.number * contractList.size +status.count}"></td>
             <td th:text="${contract.facilityName}"></td>
             <td th:text="${contract.employeeName}"></td>
             <td th:text="${contract.customerName}"></td>
@@ -70,18 +76,25 @@
             </td>
         </tr>
     </table>
-    <div>
-        <a th:href="@{'/contract'(page=${contractList.number - 1},name=${name})}"
-           th:if="${contractList.hasPrevious()}"><i class="fa-solid fa-backward"></i>Previous</a>
-        <span th:text="${contractList.number + 1}"></span>/<span th:text="${contractList.totalPages}"></span>
-        <a th:href="@{'/contract'(page=${contractList.number + 1},name=${name})}"
-           th:if="${contractList.hasNext()}">Next<i class="fa-solid fa-forward"></i></a>
+    <div aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link"
+                   th:href="@{'/contract'(page=${contractList.number - 1},name=${name})}"
+                   th:if="${contractList.hasPrevious()}">Previous</a></li>
+            <li class="page-item"><a class="page-link" th:text="${contractList.number + 1}"></a></li>
+            <li class="page-item">
+                <a class="page-link"
+                   th:href="@{'/contract'(page=${contractList.number + 1},name=${name})}"
+                   th:if="${contractList.hasNext()}">Next</a></li>
+        </ul>
     </div>
 </div>
 <div class="modal fade" id="addContract" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="border border-2 border-success p-3 rounded formCSS" th:action="@{/contract/add}"
+            <form class="border border-2 border-success p-3 rounded formCSS" style=" background-color: #afd3f3; "
+                  th:action="@{/contract/add}"
                   th:object="${contract}" method="POST">
                 <div class="modal-header">
                     <h3 class="modal-title fw-bold text-primary" id="exampleModalLabel3">ADD NEW CONTRACT</h3>
@@ -97,7 +110,7 @@
                                     <option th:each="item : ${facilityList}" th:value="${item.id}"
                                             th:text="${item.name}"></option>
                                 </select>
-                                <span class="input-group-text"><i class="fa-solid fa-file-signature"></i></span>
+
                             </div>
                         </div>
 
@@ -109,7 +122,7 @@
                                             th:text="${item.name}" th:if="${item.division.id != 3}">
                                     </option>
                                 </select>
-                                <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
+
                             </div>
                         </div>
 
@@ -120,7 +133,7 @@
                                     <option th:each="item : ${customerList}" th:value="${item.id}"
                                             th:text="${item.name}"></option>
                                 </select>
-                                <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
+
                             </div>
                         </div>
 
@@ -146,14 +159,13 @@
                                        placeholder="Nhập tiền đặt cọc..." th:field="*{deposit}" required
                                        pattern="^0|[1-9]\d*$"
                                        title="Tiền đặt cọc (VNĐ) phải là số nguyên lớn hơn hoặc bằng 0."/>
-                                <span class="input-group-text"><i class="fa-solid fa-money-bill-wave"></i></span>
                             </div>
                         </div>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success" value="delete">Save</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" value="delete">Save</button>
                     </div>
                 </div>
             </form>
@@ -166,9 +178,10 @@
         <div class="modal-content">
             <form class="border border-2 border-success p-3 rounded formCSS"
                   th:action="@{/contract/add-contract-detail}"
-                  th:object="${contractDetail}" method="POST">
+                  th:object="${contractDetail}" method="POST" style=" background-color: #afd3f3;">
                 <div class="modal-header">
-                    <h3 class="modal-title fw-bold text-primary" id="exampleModalLabel4">Add new Accompanied service</h3>
+                    <h3 class="modal-title fw-bold text-primary" id="exampleModalLabel4">Add new Accompanied
+                        service</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -185,7 +198,6 @@
                                     <option th:each="item : ${attachFacilityList}" th:value="${item.id}"
                                             th:text="${item.name + ' (₫ ' + item.cost + ')'}"></option>
                                 </select>
-                                <span class="input-group-text"><i class="fa-solid fa-file-signature"></i></span>
                             </div>
                         </div>
 
@@ -196,7 +208,6 @@
                                        placeholder="Nhập số lượng..." th:field="*{quantity}" required
                                        pattern="^[1-9]\d*$"
                                        title="Số lượng phải là số nguyên dương."/>
-                                <span class="input-group-text">#</span>
                             </div>
                         </div>
                     </div>
@@ -221,7 +232,24 @@
             </div>
 
             <div class="modal-body"></div>
-
+            <table>
+                <tr>
+                    <td>Service Name:</td>
+                    <td>karaoke</td>
+                </tr>
+                <tr>
+                    <td>Service Cost:</td>
+                    <td>100000</td>
+                </tr>
+                <tr>
+                    <td>Unit:</td>
+                    <td>Hour</td>
+                </tr>
+                <tr>
+                    <td>Service Status:</td>
+                    <td>convenient</td>
+                </tr>
+            </table>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
