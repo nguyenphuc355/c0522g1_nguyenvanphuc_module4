@@ -54,15 +54,8 @@ public class CustomerController {
         return "redirect:/customer";
     }
 
-//    @GetMapping("delete/{id}")
-//    public String showDelete(@PathVariable int id, Model model) {
-//        model.addAttribute("customerList", customerService.findById(id));
-//        return "customer/delete";
-//    }
-
     @GetMapping("/delete")
     public String delete(@RequestParam(value = "idDelete") int id, RedirectAttributes redirect) {
-//        customerService.deleteCustomer(id);
         customerService.delete(id);
         redirect.addFlashAttribute("mess", "Removed Customer successfully!");
         return "redirect:/customer";
@@ -76,13 +69,24 @@ public class CustomerController {
 
     @GetMapping("edit/{id}")
     public String edit(@PathVariable int id, Model model) {
-        model.addAttribute("customerList", customerService.findById(id));
+        Customer customer = customerService.findById(id);
+        CustomerDto customerDto = new CustomerDto();
+        BeanUtils.copyProperties(customer, customerDto);
+
+        model.addAttribute("customerDto", customerDto);
         model.addAttribute("customerTypeList", customerTypeRepository.findAll());
         return "customer/edit";
     }
 
     @PostMapping("/update")
-    public String update(Customer customer,RedirectAttributes redirectAttributes) {
+    public String update(@ModelAttribute @Validated CustomerDto customerDto, BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes,Model model) {
+        if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("customerTypeList", customerTypeRepository.findAll());
+            return "customer/edit";
+        }
+        Customer customer = new Customer();
+        BeanUtils.copyProperties(customerDto, customer);
         customerService.update(customer);
         redirectAttributes.addFlashAttribute("mess", "Update Customer successfully!");
         return "redirect:/customer";
@@ -93,6 +97,7 @@ public class CustomerController {
                          @RequestParam(value = "phoneNumber", defaultValue = "") String phoneNumber,
                          @RequestParam(value = "address", defaultValue = "") String address,
                          @PageableDefault(value = 5) Pageable pageable, Model model) {
+
         model.addAttribute("customerType", customerTypeRepository.findAll());
         model.addAttribute("customer", customerService.findByName(pageable, name, phoneNumber, address));
         model.addAttribute("name", name);

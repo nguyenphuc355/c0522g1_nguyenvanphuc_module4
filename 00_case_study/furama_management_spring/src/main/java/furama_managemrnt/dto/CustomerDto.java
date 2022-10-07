@@ -2,7 +2,6 @@ package furama_managemrnt.dto;
 
 import furama_managemrnt.model.customer.CustomerType;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
@@ -11,28 +10,31 @@ public class CustomerDto {
 
     private int id;
     @NotBlank(message = "không được để trống")
-    @Pattern(regexp = "^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$", message = "tên phải đúng định dạng, không chứa kí tự đặc biệt")
+    @Pattern(regexp = "^(([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5})| *$", message = "tên phải đúng định dạng, không chứa kí tự đặc biệt")
     private String name;
 
-    @NotBlank(message = "không được trống")
+    @NotBlank(message = "Không được để trống")
+    @Pattern(regexp = "^(19|20)\\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[0-1])| *$",
+            message = "Ngày sinh phải đúng định dạng DD/MM/YYYY.")
     private String dateOfBirth;
 
 
     private int gender;
 
     @NotBlank(message = "không được trống")
+    @Pattern(regexp = "^(\\d{9}|\\d{12})| *$", message = "Số CMND phải đúng định dạng XXXXXXXXX hoặc XXXXXXXXXXXX (X là số 0-9).")
     private String idCard;
 
     @NotBlank(message = "không được trống")
-    @Pattern(regexp = "^((\\(\\+84\\-\\))|0)[0-9]{9}$",message = "nhập đúng định dạng 0xxxxxxxxx")
+    @Pattern(regexp = "^((\\(\\+84\\-\\))|0)(90|91)[0-9]{7}| *$",
+            message = "Số điện thoại phải đúng định dạng 090xxxxxxx hoặc 091xxxxxxx hoặc (84)+90xxxxxxx hoặc (84)+91xxxxxxx.")
     private String phoneNumber;
 
-    @NotBlank(message = "không được trống")
-    @Email(message = "nhập đúng định dạng xxxx@.xxx")
+    @NotBlank(message = "Email không được để trống")
+    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}| *$", message = " Email phải đúng định dạng xxxx@.xxx")
     private String email;
 
     @NotBlank(message = "không được trống")
-    @Pattern(regexp = "^([\\p{Lu}/,-][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$", message = "tên phải đúng định dạng, không chứa kí tự đặc biệt")
     private String address;
 
     private CustomerType customerType;

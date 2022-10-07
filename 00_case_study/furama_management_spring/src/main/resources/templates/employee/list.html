@@ -11,7 +11,7 @@
         body {
             background-repeat: no-repeat;
             background-size: 100%;
-            background-image: url("https://cdn.pixabay.com/photo/2018/01/08/19/43/desktop-background-3070129__340.jpg")
+            background-image: url("https://wallpapercave.com/uwp/uwp1837890.jpeg")
         }
     </style>
 </head>
@@ -19,10 +19,12 @@
 
 <head th:insert="/index :: head"></head>
 
-<body style="margin-top: 150px">
+<body style="margin-top: 200px">
 <div class="container-fluid">
-    <div class="text-center text-light"><h1>Employee List</h1></div>
-    <div class="row">
+    <div class="text-center text-light" style="margin-top: 200px">
+        <button class="btn btn-success" style="background-color:#595C99;color: #FFFA24"><h1>Employee List</h1></button>
+    </div>
+    <div class="row" style="margin: 30px 10px">
         <div class="container-fluid col-lg-3">
             <button class="btn btn-primary btn-outline-secondary btn-sm" data-bs-toggle="modal"
                     data-bs-target="#addEmployee">
@@ -43,19 +45,27 @@
             </form>
         </div>
     </div>
-    <h3 th:text="${mess}" style="color: red"></h3>
+    <div th:if="${mess}" style="margin: 30px;width: 700px">
+        <div class="justify-content-center d-flex">
+            <div class="alert alert-success alert-dismissible fade show w-50 text-center">
+                <strong th:text="${mess}"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    </div>
     <table class="table table-striped table-bordered ">
         <thead>
-        <tr class="bg-primary">
-            <td>STT</td>
-            <td>Name</td>
-            <td>Address</td>
-            <td>division</td>
-            <td>educationDegree</td>
-            <td>position</td>
-            <td>Edit</td>
-            <td>Delete</td>
-            <td>View</td>
+        <tr class="bg-primary text-center">
+            <th>#</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>division</th>
+            <th>educationDegree</th>
+            <th>position
+            </td>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>View</th>
         </tr>
         </thead>
         <tbody>
@@ -102,28 +112,52 @@
         </tr>
         </tbody>
     </table>
-    <div aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link"
-                   th:href="@{'/employee'(page=${employeeList.number - 1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
-                   th:if="${employeeList.hasPrevious()}">Previous</a></li>
-            <li class="page-item"><a class="page-link" th:text="${employeeList.number + 1}"></a></li>
-            <li class="page-item">
-                <a class="page-link"
-                   th:href="@{'/employee'(page=${employeeList.number + 1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
-                   th:if="${employeeList.hasNext()}">Next</a></li>
-        </ul>
+    <div class="row">
+        <div class="col-5">
+
+        </div>
+        <div aria-label="Page navigation example" class="text-center col-2"
+             style="overflow-x: hidden;overflow-y: hidden">
+            <ul class="pagination">
+                <li class="page-link"><a
+                        th:href="@{'/employee'(page=${employeeList.number -1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
+                        th:if="${employeeList.hasPrevious()}">Previous</a></li>
+                <li class="page-item">
+                    <a class="page-link" th:if="${employeeList.hasPrevious()}"
+                       th:href="@{'/employee'(page=${employeeList.number - 1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
+                       th:text="${employeeList.number }"></a>
+                </li>
+
+                <li class="page-item active">
+                    <a class="page-link" th:text="${employeeList.number + 1}"
+                       th:href="@{'/employee'(page=${employeeList.number},name=${name},address=${address},phoneNumber=${phoneNumber})}">
+                        <span class="sr-only">(trang hiện tại)</span></a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" th:if="${employeeList.hasNext()}"
+                       th:href="@{'/employee'(page=${employeeList.number + 1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
+                       th:text="${employeeList.number + 2}"></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                       th:href="@{'/employee'(page=${employeeList.number + 1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
+                       th:if="${employeeList.hasNext()}">Next</a></li>
+            </ul>
+        </div>
+        <div class="col-5">
+
+        </div>
     </div>
     <div class="modal fade" id="deleteEmployee" tabindex="-1" aria-labelledby="exampleModalLabel1"
          aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" style=" background-color: #bdf0fd;">
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLabel1">Are you sure you want to delete?</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form th:action="@{/employee/delete}" method="POST" style=" background-color: #afd3f3;">
+                <form th:action="@{/employee/delete}" method="POST">
                     <div class="modal-body">
                         <span class="h6">Employee:</span><strong id="nameDelete" class="text-danger ps-2"></strong>
                         <input type="hidden" name="idDelete" id="idDelete" readonly/>
@@ -341,7 +375,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="input-group">
-                        <input type="hidden" th:field="*{id}" id="idEdit" readonly/>
+                        <input type="hidden" th:field="*{id}" id="idEdit"/>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
@@ -463,7 +497,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
             crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         function deleteEmployee(id, name) {
             document.getElementById("idDelete").value = id;
@@ -486,19 +519,18 @@
         }
 
         function editEmployee(id, name, birthday, idCard, salary, phone, email, address, position, educationDegree, division) {
-
-            $("#idEdit").val(id);
-            $("#nameEdit").val(name);
-            $("#dateOfBirthEdit").val(birthday);
-            $("#idCardEdit").val(idCard);
-            $("#salaryEdit").val(salary);
-            $("#phoneEdit").val(phone);
-            $("#emailEdit").val(email);
-            $("#addressEdit").val(address);
-            $("#positionEdit").val(position);
-            $("#educationDegreeEdit").val(educationDegree);
-            $("#divisionEdit").val(division);
-
+            document.getElementById("idEdit").value = id;
+            document.getElementById("nameEdit").value = name;
+            document.getElementById("dateOfBirthEdit").value = birthday;
+            document.getElementById("idCardEdit").value = idCard;
+            document.getElementById("salaryEdit").value = salary;
+            document.getElementById("phoneEdit").value = phone;
+            document.getElementById("emailEdit").value = email;
+            document.getElementById("addressEdit").value = address;
+            document.getElementById("positionEdit").value = position;
+            document.getElementById("educationDegreeEdit").value = educationDegree;
+            document.getElementById("divisionEdit").value = division;
+            debugger
         }
     </script>
 </div>

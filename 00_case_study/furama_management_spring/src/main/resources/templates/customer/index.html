@@ -11,21 +11,25 @@
         body {
             background-repeat: no-repeat;
             background-size: 100%;
-            background-image: url("https://cdn.pixabay.com/photo/2018/01/08/19/43/desktop-background-3070129__340.jpg")
+            background-image: url("https://wallpapercave.com/wp/8fMMJWX.jpg")
         }
     </style>
 </head>
 <head th:insert="/index :: head"></head>
 <body style="margin-top: 150px">
-<div class="text-center text-light"><h1>Customer List</h1></div>
-<div class="row" style="margin: 0 10px">
+<div class="text-center text-light" style="margin-top: 200px">
+    <button class="btn btn-success" style="background-color:#595C99;color: #FFFA24"><h1>Customer List</h1></button>
+</div>
+<div class="row" style="margin: 30px 10px">
     <div class="col-lg-3"><a th:href="@{/customer/create}" style="background-color: #22ff00">
         <button class="btn btn-primary btn-outline-secondary btn-sm" data-bs-toggle="modal">
             <span class="fa-solid fa-person-circle-plus text-light h5 my-auto me-1"></span>
             <span class="text-light">Add New Customer</span>
         </button>
     </a></div>
-    <div class="col-lg-3"></div>
+    <div class="col-lg-3">
+
+    </div>
     <div class="col-lg-6">
         <form class="d-flex" role="search" action="" method="get">
             <input class="form-control me-2" type="search" placeholder="Search by name" aria-label="Search" name="name">
@@ -37,11 +41,18 @@
         </form>
     </div>
 </div>
-<h3 th:text="${mess}" style="color: red"></h3>
+<div th:if="${mess}" style="margin: 30px;width: 700px">
+    <div class="justify-content-center d-flex">
+        <div class="alert alert-success alert-dismissible fade show w-50 text-center">
+            <strong th:text="${mess}"></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+</div>
 <table class="table table-striped table-bordered">
     <thead>
-    <tr class="bg-primary">
-        <th>STT</th>
+    <tr class="bg-primary text-center">
+        <th>#</th>
         <th>Name</th>
         <th>Date of birth</th>
         <th>Gender</th>
@@ -83,36 +94,42 @@
     </tr>
     </tbody>
 </table>
+<div class="row">
+    <div class="col-5">
 
-<div aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-link"><a
-                th:href="@{'/customer'(page=${customer.number -1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
-                th:if="${customer.hasPrevious()}">Previous</a></li>
-        <li class="page-item">
-            <a class="page-link" th:if="${customer.hasPrevious()}"
-               th:href="@{'/customer'(page=${customer.number - 1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
-               th:text="${customer.number }"></a>
-        </li>
+    </div>
+    <div aria-label="Page navigation example" class="text-center col-2" style="overflow-x: hidden;overflow-y: hidden">
+        <ul class="pagination">
+            <li class="page-link"><a
+                    th:href="@{'/customer'(page=${customer.number -1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
+                    th:if="${customer.hasPrevious()}">Previous</a></li>
+            <li class="page-item">
+                <a class="page-link" th:if="${customer.hasPrevious()}"
+                   th:href="@{'/customer'(page=${customer.number - 1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
+                   th:text="${customer.number }"></a>
+            </li>
 
-        <li class="page-item active">
-            <a class="page-link" th:text="${customer.number + 1}"
-               th:href="@{'/customer'(page=${customer.number},name=${name},address=${address},phoneNumber=${phoneNumber})}">
-                <span class="sr-only">(trang hiện tại)</span></a>
-        </li>
+            <li class="page-item active">
+                <a class="page-link" th:text="${customer.number + 1}"
+                   th:href="@{'/customer'(page=${customer.number},name=${name},address=${address},phoneNumber=${phoneNumber})}">
+                    <span class="sr-only">(trang hiện tại)</span></a>
+            </li>
 
-        <li class="page-item">
-            <a class="page-link" th:if="${customer.hasNext()}"
-               th:href="@{'/customer'(page=${customer.number + 1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
-               th:text="${customer.number + 2}"></a>
-        </li>
-        <li class="page-item">
-            <a class="page-link"
-               th:href="@{'/customer'(page=${customer.number + 1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
-               th:if="${customer.hasNext()}">Next</a></li>
-    </ul>
+            <li class="page-item">
+                <a class="page-link" th:if="${customer.hasNext()}"
+                   th:href="@{'/customer'(page=${customer.number + 1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
+                   th:text="${customer.number + 2}"></a>
+            </li>
+            <li class="page-item">
+                <a class="page-link"
+                   th:href="@{'/customer'(page=${customer.number + 1},name=${name},address=${address},phoneNumber=${phoneNumber})}"
+                   th:if="${customer.hasNext()}">Next</a></li>
+        </ul>
+    </div>
+    <div class="col-5">
+
+    </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
@@ -126,7 +143,7 @@
 <div class="modal fade" id="deleteCustomer" tabindex="-1" aria-labelledby="exampleModalLabel1"
      aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" style=" background-color: #bdf0fd;">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLabel1">Are you sure you want to delete?</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

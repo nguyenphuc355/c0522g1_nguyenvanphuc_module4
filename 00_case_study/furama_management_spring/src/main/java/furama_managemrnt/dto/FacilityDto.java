@@ -3,17 +3,44 @@ package furama_managemrnt.dto;
 import furama_managemrnt.model.facility.FacilityType;
 import furama_managemrnt.model.facility.RenType;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 public class FacilityDto {
     private int id;
+    @NotBlank(message = "Tên Dịch Vụ Không Được Để Trống")
+    @Pattern(regexp = "^(([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}( \\d*)?)| *$",
+            message = "Tên dịch vụ được phép chứa số. Và các kí tự đầu tiên của mỗi từ phải viết hoa")
     private String name;
+
+    @NotBlank(message = "Diện tích sử dụng không được để trống.")
+    @Pattern(regexp = "^[1-9]\\d*| *$", message = "Diện tích sử dụng phải là số nguyên dương.")
     private String area;
+
+    @NotBlank(message = "Chi phí thuê không được để trống.")
+    @Pattern(regexp = "^[1-9]\\d*| *$", message = "Chi phí thuê (VNĐ) phải là số nguyên dương.")
     private String cost;
-    private Integer maxPeople;
+
+    //    @NotBlank(message = "Số người tối đa không được để trống.")
+//    @Pattern(regexp = "^[1-9]\\d*| *$", message = "Số người tối đa phải là số nguyên dương.")
+
+    @Min(value = 1, message = "Số tầng phải là số nguyên dương")
+    private int maxPeople;
+
     private String standardRoom;
+
     private String descriptionOtherConvenience;
+
+    @Pattern(regexp = "^[1-9]\\d*| *$", message = "Diện tích hồ bơi phải là số nguyên dương.")
     private String poulArea;
-    private Integer numberOfFloors;
+
+    //    @Pattern(regexp = "^[1-9]\\d*| *$", message = "Số tầng phải là số nguyên dương.")
+    @Min(value = 1, message = "Số tầng phải là số nguyên dương")
+    private int numberOfFloors;
+
     private String facilityFree;
+
     private FacilityType facilityTypeS;
     private RenType renType;
 

@@ -8,17 +8,20 @@
         body {
             background-repeat: no-repeat;
             background-size: 100%;
-            background-image: url("https://cdn.pixabay.com/photo/2018/01/08/19/43/desktop-background-3070129__340.jpg")
+            background-image: url("https://wallpapercave.com/uwp/uwp466967.jpeg")
         }
     </style>
 </head>
 <head th:insert="/index :: head"></head>
 <body style="margin-top: 150px">
-<div class="abc text-center text-light"><h3>Edit Customer</h3></div>
-<div><a th:href="@{/customer}" class="text-light"><i class="fa-sharp fa-solid fa-house-user"></i>Back To Customer List</a></div>
-<div id="form" class="text-center">
-    <form th:action="@{/customer/update}" th:object="${customerList}"
-          method="post" novalidate="novalidate"  >
+<div class="text-center text-light" style="margin-top: 200px">
+    <button class="btn btn-success" style="background-color:#595C99;color: #FFFA24"><h1>Edit Customer</h1></button>
+</div>
+<div><a th:href="@{/customer}" class="text-light"><i class="fa-sharp fa-solid fa-house-user"></i>Back To Customer
+    List</a></div>
+<div id="form" style="background-color: #afd3f3">
+    <form th:action="@{/customer/update}" th:object="${customerDto}"
+          method="post" novalidate="novalidate">
         <input type="hidden" th:field="*{id}"/>
         <div>
             <label><b>Customer Name</b></label>
@@ -34,11 +37,17 @@
         </div>
         <div>
             <label><b>Gender</b></label>
-            <input type="radio" th:field="*{gender}" value="1"/>Male
-            <input type="radio" th:field="*{gender}" value="0"/>Female
-            <input type="radio" th:field="*{gender}" value="2"/>LGBT
-            <p style="color: red" th:errors="*{gender}"
-               th:if="${#fields.hasErrors('gender')}"></p>
+            <div class="d-flex">
+                <label class="d-block me-4">
+                    <input type="radio" th:field="*{gender}" value="1"/>Male
+                </label>
+                <label class="d-block me-4">
+                    <input type="radio" th:field="*{gender}" value="0"/>Female
+                </label>
+                <label class="d-block me-4">
+                    <input type="radio" th:field="*{gender}" value="2"/>LGBT
+                </label>
+            </div>
         </div>
         <div>
             <label><b>Id Card</b></label>
@@ -54,7 +63,7 @@
         </div>
         <div>
             <label><b>Email</b></label>
-            <input type="text" th:field="*{email}"/>
+            <input type="email" th:field="*{email}"/>
             <p style="color: red" th:errors="*{email}"
                th:if="${#fields.hasErrors('email')}"></p>
         </div>
@@ -74,7 +83,9 @@
                 </option>
             </select>
         </div>
-        <input id="edit" type="submit" value="Edit"/>
+        <div class="text-center">
+            <input id="edit" type="submit" value="Edit"/>
+        </div>
     </form>
 </div>
 

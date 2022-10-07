@@ -86,11 +86,11 @@ public class EmployeeController {
         return "redirect:/employee";
     }
 
-    @GetMapping("view/{id}")
-    public String view(@PathVariable int id, Model model) {
-        model.addAttribute("employeeList", employeeService.findById(id));
-        return "employee/view";
-    }
+//    @GetMapping("view/{id}")
+//    public String view(@PathVariable int id, Model model) {
+//        model.addAttribute("employeeList", employeeService.findById(id));
+//        return "employee/view";
+//    }
 //
 //    @GetMapping("edit/{id}")
 //    public String edit(@PathVariable int id, Model model) {

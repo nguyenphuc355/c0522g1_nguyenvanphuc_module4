@@ -32,7 +32,7 @@ public class FacilityController {
     @GetMapping("")
     public String search(@RequestParam(value = "name", defaultValue = "") String name,
                          @PageableDefault(value = 5) Pageable pageable, Model model) {
-        model.addAttribute("facilityList", facilityService.findByName(pageable,name));
+        model.addAttribute("facilityList", facilityService.findByName(pageable, name));
         model.addAttribute("facilityTypeList", facilityTypeService.findAll());
         model.addAttribute("rentTypeList", rentTypeService.findAll());
         model.addAttribute("name", name);
@@ -49,11 +49,11 @@ public class FacilityController {
     }
 
     @PostMapping("/save")
-    public String saveFacility(@ModelAttribute @Validated FacilityDto facilityDto,BindingResult bindingResult,
+    public String saveFacility(@ModelAttribute @Validated FacilityDto facilityDto, BindingResult bindingResult,
                                RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasFieldErrors()) {
             model.addAttribute("rentTypeList", rentTypeService.findAll());
-            model.addAttribute("facilityTypeList", facilityTypeService.findAll());;
+            model.addAttribute("facilityTypeList", facilityTypeService.findAll());
             return "facility/create";
         }
         Facility facility = new Facility();
@@ -81,8 +81,11 @@ public class FacilityController {
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute @Validated FacilityDto facilityDto, BindingResult bindingResult,RedirectAttributes redirectAttributes) {
+    public String update(@ModelAttribute @Validated FacilityDto facilityDto, BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes,Model model) {
         if (bindingResult.hasFieldErrors()) {
+            model.addAttribute("facilityTypeList", facilityTypeService.findAll());
+            model.addAttribute("rentTypeList", rentTypeService.findAll());
             return "facility/edit";
         }
         Facility facility = new Facility();

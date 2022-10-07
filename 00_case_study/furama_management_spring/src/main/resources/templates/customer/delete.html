@@ -8,7 +8,7 @@
         body {
             background-repeat: no-repeat;
             background-size: 100%;
-            background-image: url("https://cdn.pixabay.com/photo/2018/01/08/19/43/desktop-background-3070129__340.jpg")
+            background-image: url("https://wallpapercave.com/uwp/uwp466967.jpeg")
         }
     </style>
 </head>
@@ -18,7 +18,7 @@
 <div class=" text-center text-light"><h3>Remove Product</h3></div>
 <div class="text-center"><h4 style="color:red;">Are you sure ?</h4></div>
 <div><a th:href="@{/employee}"><i class="fa-sharp fa-solid fa-house-user"></i>Back To Employee List</a></div>
-<div id="form" class="text-center"  style=" background-color: #afd3f3;">
+<div id="form"  style=" background-color: #afd3f3;">
     <form  th:action="@{/customer/delete}" th:object="${customerList}"
           method="post" novalidate="novalidate">
         <input type="hidden" th:field="*{id}"/>

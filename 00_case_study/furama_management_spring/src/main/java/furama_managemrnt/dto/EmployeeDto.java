@@ -13,29 +13,32 @@ public class EmployeeDto {
 
     private int id;
 
-    @NotBlank(message = "không được để trống")
-    @Pattern(regexp = "^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$", message = "tên phải đúng định dạng, không chứa kí tự đặc biệt")
+//    @NotBlank(message = "không được để trống")
+//    @Pattern(regexp = "^([\\p{Lu}][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$", message = "tên phải đúng định dạng, không chứa kí tự đặc biệt")
     private String name;
 
-    @NotBlank(message = "không được trống")
+//    @Pattern(regexp = "^(19|20)\\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[0-1])$",
+//            message = "Ngày sinh phải đúng định dạng DD/MM/YYYY.")
     private String dateOfBirth;
 
-    @NotBlank(message = "không được trống")
+//    @NotBlank(message = "không được trống")
+//    @Pattern(regexp = "^(\\d{9}|\\d{12})| *$", message = "Số CMND phải đúng định dạng XXXXXXXXX hoặc XXXXXXXXXXXX (X là số 0-9).")
     private String idCard;
 
-    @NotBlank(message = "không được trống")
+//    @NotBlank(message = "không được trống")
     private String salary;
 
-    @NotBlank(message = "không được trống")
-    @Pattern(regexp = "^((\\(\\+84\\-\\))|0)(90|91)[0-9]{7}$",message = "nhập đúng định dạng 0xxxxxxxxx")
+
+//    @NotBlank(message = "không được trống")
+//    @Pattern(regexp = "((0|[(]84[)][+])9[01]\\\\d{7})| *$",
+//            message = "Số điện thoại phải đúng định dạng 090xxxxxxx hoặc 091xxxxxxx hoặc (84)+90xxxxxxx hoặc (84)+91xxxxxxx.")
     private String phoneNumber;
 
-    @NotBlank(message = "không được trống")
-    @Email(message = "nhập đúng định dạng xxxx@.xxx")
+
+//    @Email(message = "nhập đúng định dạng xxxx@.xxx")/
     private String email;
 
-    @NotBlank(message = "không được trống")
-//    @Pattern(regexp = "^([\\p{Lu}/,-][\\p{Ll}]{1,8})(\\s([\\p{Lu}]|[\\p{Lu}][\\p{Ll}]{1,10})){0,5}$", message = "tên phải đúng định dạng, không chứa kí tự đặc biệt")
+//    @NotBlank(message = "không được trống")
     private String address;
 
     private Division division;

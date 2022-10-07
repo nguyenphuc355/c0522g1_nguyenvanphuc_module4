@@ -8,7 +8,7 @@
              text-align: center;
              background-repeat: no-repeat;
              background-size: 100%;
-             background-image: url("https://cdn.pixabay.com/photo/2018/01/08/19/43/desktop-background-3070129__340.jpg")
+             background-image: url("https://wallpapercave.com/uwp/uwp466967.jpeg")
          }
 
         #form {
@@ -20,8 +20,10 @@
 </head>
 <head th:insert="/index :: head"></head>
 <body style="margin-top: 150px">
+<div class="text-center text-light" style="margin-top: 200px">
+    <button class="btn btn-success" style="background-color:#595C99;color: #FFFA24"><h1> View Customer</h1></button>
+</div>
 <form id="form">
-    <h2 class="text-light">View Customer</h2>
     <p>
         <a th:href="@{/customer}" class="text-light">Back to Customer list</a>
     </p>

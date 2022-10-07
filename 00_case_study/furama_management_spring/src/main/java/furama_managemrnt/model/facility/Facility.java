@@ -23,6 +23,7 @@ public class Facility {
     @JoinColumn(name = "facility_type_id", referencedColumnName = "id")
     private FacilityType facilityTypeS;
 
+   // @ManyToOne(cascade = {CascadeType.ALL})
     @ManyToOne
     @JoinColumn(name = "rent_type_id",referencedColumnName = "id")
     private RenType renType;
