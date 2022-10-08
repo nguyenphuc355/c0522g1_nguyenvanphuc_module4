@@ -10,4 +10,9 @@ public class HomeController {
     public String showHome() {
         return "index";
     }
+
+    @GetMapping("/loginPage")
+    public String showLoginPage() {
+        return "/myLogin";
+    }
 }
