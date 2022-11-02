@@ -15,6 +15,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
@@ -23,14 +25,6 @@ public class CustomerController {
 
     @Autowired
     private ICustomerTypeRepository customerTypeRepository;
-
-//    @GetMapping("")
-//    public String showList(@PageableDefault(value = 5) Pageable pageable, Model model) {
-//        model.addAttribute("customerTypeList", customerTypeRepository.findAll());
-//        model.addAttribute("customerList", customerService.findAll(pageable));
-//        return "customer/index";
-//    }
-
 
     @GetMapping("/create")
     public String showCreate(Model model) {
@@ -69,7 +63,7 @@ public class CustomerController {
 
     @GetMapping("edit/{id}")
     public String edit(@PathVariable int id, Model model) {
-        Customer customer = customerService.findById(id);
+        Optional<Customer> customer = customerService.findById(id);
         CustomerDto customerDto = new CustomerDto();
         BeanUtils.copyProperties(customer, customerDto);
 

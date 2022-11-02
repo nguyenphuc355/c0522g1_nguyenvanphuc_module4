@@ -21,6 +21,7 @@ public class Customer {
     @JoinColumn(name = "customerType_id", referencedColumnName = "id")
     private CustomerType customerType;
 
+
     public Customer() {
     }
 

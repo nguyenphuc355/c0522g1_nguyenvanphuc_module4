@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService implements ICustomerService {
@@ -26,7 +27,7 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Customer findById(int id) {
+    public Optional<Customer> findById(int id) {
         return customerRepository.findById(id);
     }
 
@@ -37,17 +38,12 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public void delete(int id) {
-         customerRepository.deleteCustomer(id);
+        customerRepository.deleteCustomer(id);
     }
 
-//    @Override
-//    public void remove(int id) {
-//        customerRepository.delete(findById(id));
-//    }
-
     @Override
-    public Page<Customer> findAll(Pageable pageable) {
-        return customerRepository.findAll(pageable);
+    public Page<Customer> findAll(Pageable pageable, String search) {
+        return customerRepository.findByName(pageable, search);
     }
 
     @Override

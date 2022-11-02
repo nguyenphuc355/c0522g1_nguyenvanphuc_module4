@@ -5,21 +5,21 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ICustomerService {
     List<Customer> findAll();
 
     void save(Customer customer);
 
-    Customer findById(int id);
+    Optional<Customer> findById(int id);
 
     void update(Customer customer);
 
     void delete(int id);
 
-//    void remove(int id);
 
-    Page<Customer> findAll(Pageable pageable);
+    Page<Customer> findAll(Pageable pageable, String search);
 
     Page<Customer> findByName(Pageable pageable, String name, String phoneNumber, String address);
 

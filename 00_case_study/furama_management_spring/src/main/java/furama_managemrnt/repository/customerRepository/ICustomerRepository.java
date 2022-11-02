@@ -10,14 +10,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Repository
-@Transactional
+
 public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
-    Customer findById(int id);
+    Optional<Customer> findById(int id);
 
-//    List<Customer> findByIsDelete();
 
+    @Transactional
     @Modifying
     @Query(value = "update  customer set is_delete = 1 where id = :keyWord", nativeQuery = true)
     void deleteCustomer(@Param("keyWord") int id);
@@ -25,4 +26,6 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
     @Query(value = "select * from Customer where name like %:name% AND phone_number LIKE %:phoneNumber% AND address like %:address% AND is_delete=0", nativeQuery = true)
     Page<Customer> searchName(@Param("name") String name, @Param("phoneNumber") String phoneNumber, @Param("address") String address, Pageable pageable);
 
+    @Query(value = "select * from customer where is_delete = 0 and name like %:search%", nativeQuery = true)
+    Page<Customer> findByName(Pageable pageable, String search);
 }
